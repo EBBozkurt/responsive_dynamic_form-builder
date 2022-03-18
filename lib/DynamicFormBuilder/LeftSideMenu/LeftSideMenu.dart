@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:dynamic_form_builder/DynamicFormBulder/LeftSideMenu/treeFromJson.dart';
+import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/treeFromJson.dart';
 import 'package:flutter/material.dart';
 
 class LeftSideMenu extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:dynamic_form_builder/DynamicFormBulder/deneme.dart';
+import 'package:dynamic_form_builder/DynamicFormBuilder/deneme.dart';
 import 'package:flutter/material.dart';
 
 void main() {

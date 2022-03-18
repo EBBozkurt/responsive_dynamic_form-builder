@@ -1,8 +1,8 @@
 // ignore_for_file: file_names, prefer_typing_uninitialized_variables, avoid_print
 
 import 'dart:convert';
-import 'package:dynamic_form_builder/DynamicFormBulder/LeftSideMenu/LeftSideMenu.dart';
-import 'package:dynamic_form_builder/DynamicFormBulder/json_schema.dart';
+import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/LeftSideMenu.dart';
+import 'package:dynamic_form_builder/DynamicFormBuilder/json_schema.dart';
 import 'package:flutter/material.dart';
 
 class Deneme extends StatefulWidget {
