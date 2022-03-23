@@ -43,10 +43,47 @@ class _SimpleSelect extends State<SimpleSelect> {
 
   @override
   Widget build(BuildContext context) {
+    Widget infoLabel = const SizedBox.shrink();
+
+    if (item['INFORMATIONTEXT'] != "") {
+      infoLabel = Padding(
+        padding: const EdgeInsets.only(top: 5.0),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.info_rounded,
+              color: Colors.blue,
+              size: 20,
+            ),
+            Text("  " + item['INFORMATIONTEXT'],
+                style: const TextStyle(
+                    fontSize: 16.0, fontStyle: FontStyle.italic)),
+          ],
+        ),
+      );
+    }
+
     Widget label = const SizedBox.shrink();
     if (Fun.labelHidden(item)) {
-      label = Text(item['LABEL'],
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0));
+      label = Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                item['ROWNUMBER'].toString() + "   ",
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+              Text(
+                item['LABEL'],
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+            ],
+          ),
+          infoLabel
+        ],
+      );
     }
     Widget unit = const SizedBox.shrink();
 
@@ -100,53 +137,59 @@ class _SimpleSelect extends State<SimpleSelect> {
       );
     }
 
+    Widget sectionPadding = const SizedBox.shrink();
+
+    if (item['TABLEVEL'] != 0) {
+      sectionPadding = const SizedBox(width: 50);
+    }
     return Container(
       margin: const EdgeInsets.only(top: 5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          label,
-          Row(
-            children: [
-              Expanded(
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButtonFormField(
-                      isExpanded: true,
-                      items: DDListesi.map((data) {
-                        return DropdownMenuItem(
-                            value: data,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 5, bottom: 5, left: 5),
-                              child: Text(data['KEY']),
-                            ));
-                      }).toList(),
-                      hint: const Text("Seçiniz"),
-                      value: secilenItem,
-                      validator: (value) {
-                        if (value == "" || value == null) {
-                          return "";
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: const InputDecoration(
-                        errorStyle: TextStyle(fontSize: 0.01),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          secilenItem = value;
+      child: Row(
+        children: [
+          sectionPadding,
+          Expanded(flex: 25, child: label),
+          Expanded(
+            flex: 5,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 7,
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButtonFormField(
+                        isExpanded: true,
+                        items: DDListesi.map((data) {
+                          return DropdownMenuItem(
+                              value: data, child: Text(data['KEY']));
+                        }).toList(),
+                        hint: const Text("Seçiniz"),
+                        value: secilenItem,
+                        validator: (value) {
+                          if (value == "" || value == null) {
+                            return "";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: const InputDecoration(
+                          errorStyle: TextStyle(fontSize: 0.01),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            secilenItem = value;
 
-                          var formattedValue =
-                              secilenItem['VALUE'] + " - " + secilenItem['KEY'];
-                          widget.onChange(widget.position,
-                              value: formattedValue);
-                        });
-                      }),
+                            var formattedValue =
+                                secilenItem['VALUE'].toString() +
+                                    " - " +
+                                    secilenItem['KEY'].toString();
+                            widget.onChange(widget.position,
+                                value: formattedValue);
+                          });
+                        }),
+                  ),
                 ),
-              ),
-              unit
-            ],
+                Expanded(flex: 3, child: unit)
+              ],
+            ),
           ),
         ],
       ),

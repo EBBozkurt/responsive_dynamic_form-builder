@@ -49,18 +49,44 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
 
   @override
   Widget build(BuildContext context) {
+    Widget infoLabel = const SizedBox.shrink();
+
+    if (item['INFORMATIONTEXT'] != "") {
+      infoLabel = Padding(
+        padding: const EdgeInsets.only(top: 5.0),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.info_rounded,
+              color: Colors.blue,
+              size: 20,
+            ),
+            Text("  " + item['INFORMATIONTEXT'],
+                style: const TextStyle(
+                    fontSize: 16.0, fontStyle: FontStyle.italic)),
+          ],
+        ),
+      );
+    }
     List<Widget> checkboxes = [];
     if (Fun.labelHidden(item)) {
-      checkboxes.add(Row(
+      checkboxes.add(Column(
         children: [
-          Text(
-            item['ROWNUMBER'].toString() + "   ",
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+          Row(
+            children: [
+              Text(
+                item['ROWNUMBER'].toString() + "   ",
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+              Text(
+                item['LABEL'],
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+            ],
           ),
-          Text(
-            item['LABEL'],
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-          ),
+          infoLabel
         ],
       ));
     }

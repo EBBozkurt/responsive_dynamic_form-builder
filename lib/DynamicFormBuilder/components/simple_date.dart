@@ -1,9 +1,10 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../functions.dart';
 
 class SimpleDate extends StatefulWidget {
-  SimpleDate({
+  const SimpleDate({
     Key? key,
     required this.item,
     required this.onChange,
@@ -27,68 +28,124 @@ class SimpleDate extends StatefulWidget {
 
 class _SimpleDate extends State<SimpleDate> {
   dynamic item;
+  TextEditingController dateController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    dateController.text = DateTime.now().toString();
     item = widget.item;
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget label = SizedBox.shrink();
-    if (Fun.labelHidden(item)) {
-      label = Container(
-        child: Text(
-          item['LABEL'],
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+    Widget infoLabel = const SizedBox.shrink();
+
+    if (item['INFORMATIONTEXT'] != "") {
+      infoLabel = Padding(
+        padding: const EdgeInsets.only(top: 5.0),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.info_rounded,
+              color: Colors.blue,
+              size: 20,
+            ),
+            Text("  " + item['INFORMATIONTEXT'],
+                style: const TextStyle(
+                    fontSize: 16.0, fontStyle: FontStyle.italic)),
+          ],
         ),
       );
     }
-    return Container(
-      margin: EdgeInsets.only(top: 5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          label,
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              InkWell(
-                  // onTap: () {
-                  //   selectDate();
-                  // },
-                  child: TextFormField(
-                readOnly: true,
-                decoration: InputDecoration(
-                  //border: OutlineInputBorder(),
-                  hintText: item['value'] ?? "",
-                  //prefixIcon: Icon(Icons.date_range_rounded),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      selectDate();
-                    },
-                    icon: Icon(Icons.calendar_today_rounded),
-                  ),
-                ),
-              )),
+    Widget label = const SizedBox.shrink();
+    if (Fun.labelHidden(item)) {
+      label = Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                item['ROWNUMBER'].toString() + "   ",
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+              Text(
+                item['LABEL'],
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
             ],
-          )
+          ),
+          infoLabel
         ],
-      ),
+      );
+    }
+    Widget sectionPadding = const SizedBox.shrink();
+
+    if (item['TABLEVEL'] != 0) {
+      sectionPadding = const SizedBox(width: 50);
+    }
+
+    return Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(flex: 17, child: label),
+            Expanded(
+              flex: 3,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: DateTimePicker(
+                        textAlignVertical: TextAlignVertical.top,
+                        readOnly: item['READONLY'],
+                        controller: dateController,
+                        type: DateTimePickerType.date,
+                        dateMask: 'dd.MM.yyyy',
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime.now(),
+                        onSaved: (value) {
+                          item['value'] = value;
+                          widget.onChange(widget.position, value: value);
+                        },
+                        onChanged: (value) {
+                          item['value'] = value;
+                          widget.onChange(widget.position, value: value);
+                        },
+                        validator: (value) {
+                          if (value == "" || value == null) {
+                            return "";
+                          } else {
+                            return null;
+                          }
+                        }),
+                  ),
+                  const Expanded(flex: 3, child: SizedBox())
+                ],
+              ),
+            ),
+          ],
+        ),
+        Divider(
+          thickness: 1,
+          color: Colors.grey[850],
+        ),
+      ],
     );
   }
 
   Future selectDate() async {
     DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: DateTime.now().subtract(Duration(days: 360)),
-        firstDate: DateTime.now().subtract(Duration(days: 360)),
-        lastDate: DateTime.now().add(Duration(days: 360)));
+        initialDate: DateTime.now().subtract(const Duration(days: 360)),
+        firstDate: DateTime.now().subtract(const Duration(days: 360)),
+        lastDate: DateTime.now().add(const Duration(days: 360)));
     if (picked != null) {
       String date =
           "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
-      this.setState(() {
+      setState(() {
         item['value'] = date;
         widget.onChange(widget.position, date);
       });

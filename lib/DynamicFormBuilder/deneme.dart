@@ -20,6 +20,25 @@ class _AktifCalismalarPageState extends State<Deneme> {
     'description': "Pittsburgh Sleep Quality Index (PSQI)",
     'fields': [
       {
+        "ID": 0,
+        "ROWNUMBER": 0,
+        "TABLEVEL": 0,
+        "ISBOLD": false,
+        "ISNUMERIC": false,
+        "BACKGROUNDCOLOR": "",
+        "SECTIONHEADER": false,
+        "NAME": "Unique ID 0",
+        "INFORMATIONTEXT": "Tarihi giriniz",
+        "TYPE": "Tarih/Saat",
+        "LABEL": "Formu doldurduğunuz tarih?",
+        "VALUE": "",
+        "VALUEDATASOURCE": "",
+        "UNIT": {"TYPE": "STATIC", "DATASOURCE": ""},
+        "READONLY": false,
+        "ISREQUIRED": true,
+        "SHORTTEXT": true,
+      },
+      {
         "ID": 1,
         "ROWNUMBER": 1,
         "TABLEVEL": 0,
@@ -28,7 +47,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "BACKGROUNDCOLOR": "",
         "SECTIONHEADER": false,
         "NAME": "Unique ID 1",
-        "INFORMATIONTEXT": "",
+        "INFORMATIONTEXT": "Saat olarak yazınız.",
         "TYPE": "Serbest Metin",
         "LABEL": "Geçen ay geceleri genellikle ne zaman yattınız?",
         "VALUE": "",
@@ -47,7 +66,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "BACKGROUNDCOLOR": "",
         "SECTIONHEADER": false,
         "NAME": "Unique ID 2",
-        "INFORMATIONTEXT": "",
+        "INFORMATIONTEXT": "200 karakteri geçmeyiniz.",
         "TYPE": "Serbest Metin",
         "LABEL":
             "Geçen ay geceleri uykuya dalmanız genellikle ne kadar zaman aldı?",
@@ -136,7 +155,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "SECTIONHEADER": false,
         "NAME": "Unique ID 5.1",
         "INFORMATIONTEXT": "",
-        "TYPE": "RadioButton",
+        "TYPE": "Çoktan Seçmeli",
         "LABEL": "30 dakika içinde uykuya dalamadınız",
         "VALUE": 0,
         "VALUEDATASOURCE": [
@@ -159,7 +178,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "BACKGROUNDCOLOR": "",
         "SECTIONHEADER": false,
         "NAME": "Unique ID 5.2",
-        "INFORMATIONTEXT": "",
+        "INFORMATIONTEXT": "00:00 - 06:00 arası baz alınmalıdır.",
         "TYPE": "RadioButton",
         "LABEL": "Gece yarısı veya sabah erkenden uyandınız",
         "VALUE": 0,
@@ -452,6 +471,12 @@ class _AktifCalismalarPageState extends State<Deneme> {
         selectedWidget("Uyku");
       }
     });
+  }
+
+  @override
+  void initState() {
+    formOnChange("Uyku");
+    super.initState();
   }
 
   @override

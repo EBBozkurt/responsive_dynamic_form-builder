@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../functions.dart';
+import 'package:flutter/services.dart';
 
 class SimpleText extends StatefulWidget {
   const SimpleText({
@@ -38,18 +39,46 @@ class _SimpleText extends State<SimpleText> {
 
   @override
   Widget build(BuildContext context) {
+    Widget infoLabel = const SizedBox.shrink();
+
+    if (item['INFORMATIONTEXT'] != "") {
+      infoLabel = Padding(
+        padding: const EdgeInsets.only(top: 5.0),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.info_rounded,
+              color: Colors.blue,
+              size: 20,
+            ),
+            Text("  " + item['INFORMATIONTEXT'],
+                style: const TextStyle(
+                    fontSize: 16.0, fontStyle: FontStyle.italic)),
+          ],
+        ),
+      );
+    }
+
     Widget label = const SizedBox.shrink();
     if (Fun.labelHidden(item)) {
-      label = Row(
+      label = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            item['ROWNUMBER'].toString() + "   ",
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+          Row(
+            children: [
+              Text(
+                item['ROWNUMBER'].toString() + "   ",
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+              Text(
+                item['LABEL'],
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+            ],
           ),
-          Text(
-            item['LABEL'],
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-          ),
+          infoLabel
         ],
       );
     }
@@ -152,6 +181,13 @@ class _SimpleText extends State<SimpleText> {
                                       widget.onChange(widget.position,
                                           value: value);
                                     },
+                                    inputFormatters: [
+                                      item['ISNUMERIC']
+                                          ? FilteringTextInputFormatter.allow(
+                                              RegExp('[0-9.:]'))
+                                          : FilteringTextInputFormatter.allow(
+                                              RegExp('[a-zA-Z0-9ÇçğĞİüÜöÖ.,:]'))
+                                    ],
                                     obscureText: item['TYPE'] == "Password"
                                         ? true
                                         : false,
@@ -200,6 +236,13 @@ class _SimpleText extends State<SimpleText> {
 
                                 widget.onChange(widget.position, value: value);
                               },
+                              inputFormatters: [
+                                item['ISNUMERIC']
+                                    ? FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]'))
+                                    : FilteringTextInputFormatter.allow(
+                                        RegExp(""))
+                              ],
                               obscureText:
                                   item['TYPE'] == "Password" ? true : false,
                               keyboardType: item['ISNUMERIC']
