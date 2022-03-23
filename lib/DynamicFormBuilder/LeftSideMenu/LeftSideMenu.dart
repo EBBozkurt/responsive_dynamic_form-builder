@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/treeFromJson.dart';
 import 'package:flutter/material.dart';
 
 class LeftSideMenu extends StatefulWidget {
@@ -20,75 +19,73 @@ class _LeftSideMenuState extends State<LeftSideMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return TreeFromJson();
-
-    // Container(
-    //   color: Colors.red,
-    //   padding: padding,
-    //   child: ExpansionTile(
-    //       leading: const Icon(
-    //         Icons.square,
-    //         color: Colors.white,
-    //         size: 18,
-    //       ),
-    //       onExpansionChanged: (b) {
-    //         setState(() {
-    //           _isExpanded = !_isExpanded; //using set state just to exemplify
-    //         });
-    //       },
-    //       trailing: Icon(
-    //         _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-    //         color: Colors.white,
-    //       ),
-    //       title: const Text(
-    //         'dynamic text',
-    //         style: TextStyle(color: Colors.white),
-    //       ),
-    //       children: [
-    //         Padding(
-    //           padding: const EdgeInsets.only(left: 20.0),
-    //           child: buildMenuItem(
-    //               text: 'dynamic text',
-    //               icon: Icons.arrow_right_alt_rounded,
-    //               onClicked: () {
-    //                 widget.onChange("Uyku");
-    //               }),
-    //         ),
-    //         ExpansionTile(
-    //             leading: const Icon(
-    //               Icons.square,
-    //               color: Colors.white,
-    //               size: 18,
-    //             ),
-    //             onExpansionChanged: (b) {
-    //               setState(() {
-    //                 _isExpanded =
-    //                     !_isExpanded; //using set state just to exemplify
-    //               });
-    //             },
-    //             trailing: Icon(
-    //               _isExpanded
-    //                   ? Icons.keyboard_arrow_up
-    //                   : Icons.keyboard_arrow_down,
-    //               color: Colors.white,
-    //             ),
-    //             title: const Text(
-    //               'dynamic text',
-    //               style: TextStyle(color: Colors.white),
-    //             ),
-    //             children: [
-    //               Padding(
-    //                 padding: const EdgeInsets.only(left: 20.0),
-    //                 child: buildMenuItem(
-    //                     text: 'dynamic text',
-    //                     icon: Icons.arrow_right_alt_rounded,
-    //                     onClicked: () {
-    //                       widget.onChange("Uyku");
-    //                     }),
-    //               ),
-    //             ]),
-    //       ]),
-    // );
+    return Container(
+      color: Colors.red,
+      padding: padding,
+      child: ExpansionTile(
+          leading: const Icon(
+            Icons.square,
+            color: Colors.white,
+            size: 18,
+          ),
+          onExpansionChanged: (b) {
+            setState(() {
+              _isExpanded = !_isExpanded; //using set state just to exemplify
+            });
+          },
+          trailing: Icon(
+            _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+            color: Colors.white,
+          ),
+          title: const Text(
+            'dynamic text',
+            style: TextStyle(color: Colors.white),
+          ),
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: buildMenuItem(
+                  text: 'dynamic text',
+                  icon: Icons.arrow_right_alt_rounded,
+                  onClicked: () {
+                    widget.onChange("Uyku");
+                  }),
+            ),
+            ExpansionTile(
+                leading: const Icon(
+                  Icons.square,
+                  color: Colors.white,
+                  size: 18,
+                ),
+                onExpansionChanged: (b) {
+                  setState(() {
+                    _isExpanded =
+                        !_isExpanded; //using set state just to exemplify
+                  });
+                },
+                trailing: Icon(
+                  _isExpanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                  color: Colors.white,
+                ),
+                title: const Text(
+                  'dynamic text',
+                  style: TextStyle(color: Colors.white),
+                ),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: buildMenuItem(
+                        text: 'dynamic text',
+                        icon: Icons.arrow_right_alt_rounded,
+                        onClicked: () {
+                          widget.onChange("Uyku");
+                        }),
+                  ),
+                ]),
+          ]),
+    );
   }
 
   Widget buildMenuItem({

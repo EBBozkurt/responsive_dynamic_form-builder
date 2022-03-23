@@ -1,11 +1,16 @@
 // ignore_for_file: file_names, avoid_print
 
 import 'dart:convert';
+
+import 'package:dynamic_form_builder/CustomTreeView/flutter_simple_treeview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_simple_treeview/flutter_simple_treeview.dart';
 
 class TreeFromJson extends StatefulWidget {
-  const TreeFromJson({Key? key}) : super(key: key);
+  const TreeFromJson({
+    Key? key,
+    required this.onChange,
+  }) : super(key: key);
+  final Function onChange;
 
   @override
   _TreeFromJsonState createState() => _TreeFromJsonState();
@@ -16,18 +21,115 @@ class _TreeFromJsonState extends State<TreeFromJson> {
       TreeController(allNodesExpanded: false);
 
   String gelenVeri = json.encode({
-    "employee": {
-      "name": "sonoo",
-      "level": 56,
-      "married": true,
-      "hobby": null,
-      "employee": {
-        "name": "sonoo",
-        "level": 56,
-        "married": true,
-        "hobby": null
+    "folder": [
+      {
+        "id": 1,
+        "name": "737669HPB2001",
+        "type": "folder",
+        "formID": "",
+        "folder": [
+          {
+            "id": 2,
+            "name": "TR10007-AKOVA",
+            "type": "folder",
+            "formID": "",
+            "folder": [
+              {
+                "id": 21,
+                "name": "10042",
+                "type": "folder",
+                "formID": "",
+                "folder": [
+                  {
+                    "id": 22,
+                    "name": "Day 1",
+                    "type": "folder",
+                    "formID": "",
+                    "folder": [
+                      {
+                        "id": 23,
+                        "type": "form",
+                        "formID": 1,
+                        "name": "Vital Signs",
+                        "folder": []
+                      },
+                      {
+                        "id": 24,
+                        "type": "form",
+                        "formID": 2,
+                        "name": "Date Of Visit",
+                        "folder": []
+                      },
+                      {
+                        "id": 24,
+                        "type": "form",
+                        "formID": 3,
+                        "name": "Randomization",
+                        "folder": []
+                      },
+                    ]
+                  },
+                ]
+              }
+            ]
+          }
+        ]
       },
-    },
+      {
+        "id": 1,
+        "name": "857669HPB2001",
+        "type": "folder",
+        "formID": "",
+        "folder": [
+          {
+            "id": 2,
+            "name": "TR10067-AVOKADO",
+            "type": "folder",
+            "formID": "",
+            "folder": [
+              {
+                "id": 21,
+                "name": "10049",
+                "type": "folder",
+                "formID": "",
+                "folder": [
+                  {
+                    "id": 22,
+                    "name": "Day 1",
+                    "type": "folder",
+                    "formID": "",
+                    "folder": [
+                      {
+                        "id": 23,
+                        "type": "form",
+                        "formID": 1,
+                        "name": "Vital Signs",
+                        "folder": []
+                      },
+                      {
+                        "id": 24,
+                        "type": "form",
+                        "formID": 2,
+                        "name": "Date Of Visit",
+                        "folder": []
+                      },
+                      {
+                        "id": 24,
+                        "type": "form",
+                        "formID": 3,
+                        "name":
+                            "Randomizationbasfasfa  afasfasfas  fasfasfa s fasf as fsa",
+                        "folder": []
+                      },
+                    ]
+                  },
+                ]
+              }
+            ]
+          }
+        ]
+      },
+    ]
   });
 
   @override
@@ -42,9 +144,11 @@ class _TreeFromJsonState extends State<TreeFromJson> {
 
   /// Builds tree or error message out of the entered content.
   Widget buildTree() {
+    var parsedJson = json.decode(gelenVeri);
     try {
-      var parsedJson = json.decode(gelenVeri);
       return TreeView(
+        iconSize: 20,
+        indent: 10,
         nodes: toTreeNodes(parsedJson),
         treeController: _treeController,
       );
@@ -54,22 +158,62 @@ class _TreeFromJsonState extends State<TreeFromJson> {
   }
 
   List<TreeNode> toTreeNodes(dynamic parsedJson) {
+    List<TreeNode> result = [];
+    Widget dynamicTitle = const SizedBox.shrink();
+
     if (parsedJson is Map<String, dynamic>) {
-      return parsedJson.keys.map((key) {
-        print(key);
-        return TreeNode(
-            content: Text('$key:'), children: toTreeNodes(parsedJson[key]));
-      }).toList();
+      for (int i = 0; i < parsedJson['folder'].length; i++) {
+        var item = parsedJson['folder'][i];
+
+        dynamicTitle = InkWell(
+          onTap: () => widget.onChange("Uyku"),
+          child: Row(
+            children: [
+              typeDetermine(item['type'].toString()),
+              const SizedBox(width: 10),
+              Text(item['name'])
+            ],
+          ),
+        );
+
+        result.add(TreeNode(
+            content: dynamicTitle, children: toTreeNodes(item['folder'])));
+      }
+
+      return result;
     }
 
-    return [
-      TreeNode(
-          content: InkWell(
-        child: Text(parsedJson.toString()),
-        onTap: () {
-          print(parsedJson.toString());
-        },
-      ))
-    ];
+    if (parsedJson is List<dynamic>) {
+      return parsedJson
+          .asMap()
+          .map((i, element) {
+            dynamicTitle = Row(
+              children: [
+                typeDetermine(element['type'].toString()),
+                const SizedBox(width: 10),
+                Text(element['name'])
+              ],
+            );
+            return MapEntry(
+                i,
+                TreeNode(
+                    content: dynamicTitle, children: toTreeNodes(element)));
+          })
+          .values
+          .toList();
+    }
+
+    print(parsedJson.toString());
+    return [TreeNode(content: Text(parsedJson.toString()))];
+  }
+
+  Icon typeDetermine(String type) {
+    if (type == "folder") {
+      return const Icon(Icons.folder, color: Colors.blue);
+    } else if (type == "form") {
+      return const Icon(Icons.account_tree_rounded, color: Colors.blue);
+    } else {
+      return const Icon(Icons.account_tree_rounded, color: Colors.blue);
+    }
   }
 }

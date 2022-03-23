@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, prefer_typing_uninitialized_variables, avoid_print
 
 import 'dart:convert';
-import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/LeftSideMenu.dart';
+import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/treeFromJson.dart';
 import 'package:dynamic_form_builder/DynamicFormBuilder/json_schema.dart';
 import 'package:flutter/material.dart';
 
@@ -446,41 +446,6 @@ class _AktifCalismalarPageState extends State<Deneme> {
   });
   dynamic response;
 
-  List leftSideMenu = [
-    {
-      "FORMID": 0,
-      "SECTIONHEADER": "Uyku Formları",
-      "TITLE": "Uyku Formları",
-      "VALUEDATASOURCE": "",
-      "CHILDREN": [
-        {
-          "SECTIONHEADER": "Uyku Sürekliliği",
-          "TITLE": "Uyku Sürekliliği",
-          "VALUEDATASOURCE": "",
-          "CHILDREN": [
-            {
-              "SECTIONHEADER": "",
-              "TITLE": "Uyku Sürekliliği Formu 1",
-              "VALUEDATASOURCE": "getSleepCon1",
-              "CHILDREN": [],
-            },
-            {
-              "SECTIONHEADER": "",
-              "TITLE": "Uyku Sürekliliği Formu 2",
-              "VALUEDATASOURCE": "getSleepCon2",
-              "CHILDREN": [],
-            },
-            {
-              "SECTIONHEADER": "",
-              "TITLE": "Uyku Sürekliliği Formu 3",
-              "VALUEDATASOURCE": "getSleepCon3",
-              "CHILDREN": [],
-            }
-          ]
-        }
-      ],
-    },
-  ];
   void formOnChange(String widget) {
     setState(() {
       if (widget == "Uyku") {
@@ -511,7 +476,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
                   flex: 3,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
-                    child: LeftSideMenu(onChange: formOnChange),
+                    child: TreeFromJson(onChange: formOnChange),
                   )),
               Expanded(flex: 17, child: formWidget),
             ],
