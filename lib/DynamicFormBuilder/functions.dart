@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new
+
 class Fun {
   static bool labelHidden(item) {
     if (item.containsKey('hiddenLabel')) {
@@ -11,7 +13,7 @@ class Fun {
   }
 
   static String? validateEmail(item, String value) {
-    String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}" +
+    String p = "[a-zA-Z0-9+._%-+]{1,256}" +
         "\\@" +
         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
         "(" +

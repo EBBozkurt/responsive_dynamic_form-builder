@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../functions.dart';
-
 class SimpleSectionHeader extends StatefulWidget {
   const SimpleSectionHeader({
     Key? key,

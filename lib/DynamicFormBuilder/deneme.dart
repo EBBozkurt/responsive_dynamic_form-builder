@@ -164,7 +164,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
           {"VALUE": 2, "KEY": "1-2 kez"},
           {"VALUE": 3, "KEY": "3'ten çok"},
         ],
-        "UNIT": {"TYPE": "STATIC", "DATASOURCE": ""},
+        "UNIT": {"TYPE": "STATIC", "DATASO+URCE": ""},
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
