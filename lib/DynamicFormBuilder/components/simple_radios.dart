@@ -87,7 +87,7 @@ class _SimpleRadios extends State<SimpleRadios> {
     Widget sectionPadding = const SizedBox.shrink();
 
     if (item['TABLEVEL'] != 0) {
-      sectionPadding = const SizedBox(width: 50);
+      sectionPadding = SizedBox(width: item['TABLEVEL']);
     }
 
     List<Widget> radios = [];

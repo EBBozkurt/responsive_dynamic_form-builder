@@ -137,7 +137,7 @@ class _SimpleText extends State<SimpleText> {
     Widget sectionPadding = const SizedBox.shrink();
 
     if (item['TABLEVEL'] != 0) {
-      sectionPadding = const SizedBox(width: 50);
+      sectionPadding = SizedBox(width: item['TABLEVEL']);
     }
 
     return Container(
@@ -171,8 +171,6 @@ class _SimpleText extends State<SimpleText> {
                                         ? TextAlign.right
                                         : TextAlign.left,
                                     controller: null,
-                                    maxLines:
-                                        item['TYPE'] == "TextArea" ? 10 : 1,
                                     onChanged: (String value) {
                                       item['value'] = value;
                                       // _handleChanged();
@@ -228,7 +226,6 @@ class _SimpleText extends State<SimpleText> {
                                   ? TextAlign.right
                                   : TextAlign.left,
                               controller: null,
-                              maxLines: item['TYPE'] == "TextArea" ? 10 : 1,
                               onChanged: (String value) {
                                 item['value'] = value;
                                 // _handleChanged();

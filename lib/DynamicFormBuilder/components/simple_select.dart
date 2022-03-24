@@ -140,7 +140,7 @@ class _SimpleSelect extends State<SimpleSelect> {
     Widget sectionPadding = const SizedBox.shrink();
 
     if (item['TABLEVEL'] != 0) {
-      sectionPadding = const SizedBox(width: 50);
+      sectionPadding = SizedBox(width: item['TABLEVEL']);
     }
     return Container(
       margin: const EdgeInsets.only(top: 5.0),

@@ -166,7 +166,7 @@ class _TreeFromJsonState extends State<TreeFromJson> {
         var item = parsedJson['folder'][i];
 
         dynamicTitle = InkWell(
-          onTap: () => widget.onChange("Uyku"),
+          onTap: () => widget.onChange(item['formID']),
           child: Row(
             children: [
               typeDetermine(item['type'].toString()),

@@ -93,7 +93,7 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
     Widget sectionPadding = const SizedBox.shrink();
 
     if (item['TABLEVEL'] != 0) {
-      sectionPadding = const SizedBox(width: 50);
+      sectionPadding = SizedBox(width: item['TABLEVEL']);
     }
     for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
       checkboxes.add(

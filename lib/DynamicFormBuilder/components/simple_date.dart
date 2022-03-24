@@ -83,7 +83,7 @@ class _SimpleDate extends State<SimpleDate> {
     Widget sectionPadding = const SizedBox.shrink();
 
     if (item['TABLEVEL'] != 0) {
-      sectionPadding = const SizedBox(width: 50);
+      sectionPadding = SizedBox(width: item['TABLEVEL']);
     }
 
     return Column(

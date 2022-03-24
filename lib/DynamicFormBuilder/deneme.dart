@@ -18,6 +18,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
   String form = json.encode({
     'title': "Pittsburgh Uyku Kalite İndeksi (PUKİ)",
     'description': "Pittsburgh Sleep Quality Index (PSQI)",
+    'formID': 1,
     'fields': [
       {
         "ID": 0,
@@ -37,6 +38,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": true,
+        "REGEX": "",
       },
       {
         "ID": 1,
@@ -56,6 +58,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": true,
+        "REGEX": "",
       },
       {
         "ID": 2,
@@ -81,6 +84,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 3,
@@ -100,6 +104,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": true,
+        "REGEX": "",
       },
       {
         "ID": 4,
@@ -124,6 +129,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": true,
+        "REGEX": "",
       },
       {
         "ID": 5,
@@ -144,11 +150,12 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 5.1,
         "ROWNUMBER": 5.1,
-        "TABLEVEL": 4,
+        "TABLEVEL": 50,
         "ISBOLD": false,
         "ISNUMERIC": false,
         "BACKGROUNDCOLOR": "",
@@ -164,15 +171,16 @@ class _AktifCalismalarPageState extends State<Deneme> {
           {"VALUE": 2, "KEY": "1-2 kez"},
           {"VALUE": 3, "KEY": "3'ten çok"},
         ],
-        "UNIT": {"TYPE": "STATIC", "DATASO+URCE": ""},
+        "UNIT": {"TYPE": "STATIC", "DATASOURCE": ""},
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 5.2,
         "ROWNUMBER": 5.2,
-        "TABLEVEL": 4,
+        "TABLEVEL": 50,
         "ISBOLD": false,
         "ISNUMERIC": false,
         "BACKGROUNDCOLOR": "",
@@ -192,11 +200,12 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 5.3,
         "ROWNUMBER": 5.3,
-        "TABLEVEL": 4,
+        "TABLEVEL": 50,
         "ISBOLD": false,
         "ISNUMERIC": false,
         "BACKGROUNDCOLOR": "",
@@ -216,11 +225,12 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 5.4,
         "ROWNUMBER": 5.4,
-        "TABLEVEL": 4,
+        "TABLEVEL": 50,
         "ISBOLD": false,
         "ISNUMERIC": false,
         "BACKGROUNDCOLOR": "",
@@ -240,11 +250,12 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 5.5,
         "ROWNUMBER": 5.5,
-        "TABLEVEL": 4,
+        "TABLEVEL": 50,
         "ISBOLD": false,
         "ISNUMERIC": false,
         "BACKGROUNDCOLOR": "",
@@ -264,6 +275,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 6,
@@ -289,6 +301,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 7,
@@ -314,6 +327,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 8,
@@ -339,6 +353,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 9,
@@ -363,6 +378,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 10,
@@ -386,6 +402,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 11,
@@ -418,6 +435,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 12,
@@ -437,6 +455,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
       {
         "ID": 13,
@@ -460,22 +479,21 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": false,
+        "REGEX": "",
       },
     ],
   });
   dynamic response;
 
-  void formOnChange(String widget) {
+  void formOnChange(int formID) {
     setState(() {
-      if (widget == "Uyku") {
-        selectedWidget("Uyku");
-      }
+      selectedWidget(formID);
     });
   }
 
   @override
   void initState() {
-    formOnChange("Uyku");
+    formOnChange(1);
     super.initState();
   }
 
@@ -511,10 +529,10 @@ class _AktifCalismalarPageState extends State<Deneme> {
     );
   }
 
-  selectedWidget(String gelenWidget) {
-    print("selectedWidget çalıştı" + gelenWidget);
+  selectedWidget(int formID) {
+    print("selectedWidget çalıştı, FORM ID:  " + formID.toString());
 
-    if (gelenWidget == "Uyku") {
+    if (formID == 1) {
       formWidget = JsonSchema(
         form: form,
         autovalidateMode: AutovalidateMode.always,
