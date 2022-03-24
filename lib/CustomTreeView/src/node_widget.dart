@@ -57,12 +57,15 @@ class _NodeWidgetState extends State<NodeWidget> {
     if (!widget.treeNode.content.toString().contains("null")) {
       content = Row(
         children: [
-          IconButton(
-            iconSize: widget.iconSize ?? 24.0,
-            icon: Icon(icon),
-            onPressed: onIconPressed,
+          SizedBox(
+            width: 32,
+            child: IconButton(
+              iconSize: widget.iconSize ?? 24.0,
+              icon: Icon(icon),
+              onPressed: onIconPressed,
+            ),
           ),
-          widget.treeNode.content!,
+          Expanded(child: widget.treeNode.content!),
         ],
       );
     }

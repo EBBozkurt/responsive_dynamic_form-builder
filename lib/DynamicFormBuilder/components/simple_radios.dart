@@ -72,10 +72,12 @@ class _SimpleRadios extends State<SimpleRadios> {
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
-              Text(
-                item['LABEL'],
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              Expanded(
+                child: Text(
+                  item['LABEL'],
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16.0),
+                ),
               ),
             ],
           ),

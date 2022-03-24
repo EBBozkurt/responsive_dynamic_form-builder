@@ -74,10 +74,12 @@ class _SimpleSelect extends State<SimpleSelect> {
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
-              Text(
-                item['LABEL'],
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              Expanded(
+                child: Text(
+                  item['LABEL'],
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16.0),
+                ),
               ),
             ],
           ),
@@ -147,13 +149,13 @@ class _SimpleSelect extends State<SimpleSelect> {
       child: Row(
         children: [
           sectionPadding,
-          Expanded(flex: 25, child: label),
+          Expanded(flex: 16, child: label),
           Expanded(
-            flex: 5,
+            flex: 4,
             child: Row(
               children: [
                 Expanded(
-                  flex: 7,
+                  flex: 12,
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField(
                         isExpanded: true,
@@ -187,7 +189,7 @@ class _SimpleSelect extends State<SimpleSelect> {
                         }),
                   ),
                 ),
-                Expanded(flex: 3, child: unit)
+                Expanded(flex: 8, child: unit)
               ],
             ),
           ),

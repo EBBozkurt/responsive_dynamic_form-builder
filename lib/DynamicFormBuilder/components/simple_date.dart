@@ -69,10 +69,12 @@ class _SimpleDate extends State<SimpleDate> {
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
-              Text(
-                item['LABEL'],
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              Expanded(
+                child: Text(
+                  item['LABEL'],
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16.0),
+                ),
               ),
             ],
           ),
@@ -91,13 +93,13 @@ class _SimpleDate extends State<SimpleDate> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(flex: 17, child: label),
+            Expanded(flex: 16, child: label),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Row(
                 children: [
                   Expanded(
-                    flex: 7,
+                    flex: 12,
                     child: DateTimePicker(
                         textAlignVertical: TextAlignVertical.top,
                         readOnly: item['READONLY'],
@@ -122,7 +124,7 @@ class _SimpleDate extends State<SimpleDate> {
                           }
                         }),
                   ),
-                  const Expanded(flex: 3, child: SizedBox())
+                  const Expanded(flex: 8, child: SizedBox())
                 ],
               ),
             ),

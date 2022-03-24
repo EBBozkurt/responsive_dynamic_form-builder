@@ -165,15 +165,16 @@ class _TreeFromJsonState extends State<TreeFromJson> {
       for (int i = 0; i < parsedJson['folder'].length; i++) {
         var item = parsedJson['folder'][i];
 
-        dynamicTitle = InkWell(
-          onTap: () => widget.onChange(item['formID']),
-          child: Row(
-            children: [
-              typeDetermine(item['type'].toString()),
-              const SizedBox(width: 10),
-              Text(item['name'])
-            ],
-          ),
+        dynamicTitle = Row(
+          children: [
+            typeDetermine(item['type'].toString()),
+            const SizedBox(width: 10),
+            Expanded(
+              child: InkWell(
+                  onTap: () => widget.onChange(item['formID']),
+                  child: Text(item['name'])),
+            )
+          ],
         );
 
         result.add(TreeNode(

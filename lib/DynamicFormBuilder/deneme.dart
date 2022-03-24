@@ -510,18 +510,18 @@ class _AktifCalismalarPageState extends State<Deneme> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(
-              top: 10, bottom: 10.5, right: 0, left: 16.0),
+          padding:
+              const EdgeInsets.only(top: 10, bottom: 10.5, right: 0, left: 0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                  flex: 3,
+              SizedBox(
+                  width: 325,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: TreeFromJson(onChange: formOnChange),
                   )),
-              Expanded(flex: 17, child: formWidget),
+              Expanded(child: formWidget),
             ],
           ),
         ),

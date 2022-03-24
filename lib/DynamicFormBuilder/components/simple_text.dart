@@ -153,7 +153,7 @@ class _SimpleText extends State<SimpleText> {
                       Row(
                         children: [
                           Expanded(
-                              flex: 17,
+                              flex: 16,
                               child: Row(
                                 children: [
                                   label,
@@ -161,11 +161,11 @@ class _SimpleText extends State<SimpleText> {
                                 ],
                               )),
                           Expanded(
-                            flex: 3,
+                            flex: 4,
                             child: Row(
                               children: [
                                 Expanded(
-                                  flex: 7,
+                                  flex: 12,
                                   child: TextFormField(
                                     textAlign: item["ISNUMERIC"]
                                         ? TextAlign.right
@@ -194,7 +194,7 @@ class _SimpleText extends State<SimpleText> {
                                         : TextInputType.text,
                                   ),
                                 ),
-                                Expanded(flex: 3, child: unit)
+                                Expanded(flex: 8, child: unit)
                               ],
                             ),
                           ),
@@ -220,7 +220,7 @@ class _SimpleText extends State<SimpleText> {
                       Row(
                         children: [
                           Expanded(
-                            flex: 86,
+                            flex: 83,
                             child: TextFormField(
                               textAlign: item["ISNUMERIC"]
                                   ? TextAlign.right
@@ -247,7 +247,7 @@ class _SimpleText extends State<SimpleText> {
                                   : TextInputType.text,
                             ),
                           ),
-                          Expanded(flex: 4, child: unit)
+                          Expanded(flex: 7, child: unit)
                         ],
                       ),
                       Divider(
