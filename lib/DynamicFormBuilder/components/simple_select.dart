@@ -37,7 +37,7 @@ class _SimpleSelect extends State<SimpleSelect> {
   void initState() {
     item = widget.item;
     DDListesi = item['VALUEDATASOURCE'];
-    print(widget.item);
+
     super.initState();
   }
 
@@ -113,7 +113,7 @@ class _SimpleSelect extends State<SimpleSelect> {
                         return DropdownMenuItem(
                             value: data, child: Text(data['KEY']));
                       }).toList(),
-                      hint: const Text("Birim Seçiniz"),
+                      hint: const Text("Seçiniz"),
                       value: secilenUnit,
                       validator: (value) {
                         if (value == "" || value == null) {

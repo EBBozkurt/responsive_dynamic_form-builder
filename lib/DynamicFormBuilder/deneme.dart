@@ -23,7 +23,7 @@ class _AktifCalismalarPageState extends State<Deneme> {
       {
         "ID": 0,
         "ROWNUMBER": 0,
-        "TABLEVEL": 0,
+        "TABLEVEL": 5,
         "ISBOLD": false,
         "ISNUMERIC": false,
         "BACKGROUNDCOLOR": "",
@@ -54,7 +54,13 @@ class _AktifCalismalarPageState extends State<Deneme> {
         "LABEL": "Geçen ay geceleri genellikle ne zaman yattınız?",
         "VALUE": "",
         "VALUEDATASOURCE": "",
-        "UNIT": {"TYPE": "STATIC", "DATASOURCE": ""},
+        "UNIT": {
+          "TYPE": "DYNAMIC",
+          "DATASOURCE": [
+            {"VALUE": 0, "KEY": "AM"},
+            {"VALUE": 1, "KEY": "PM"},
+          ]
+        },
         "READONLY": false,
         "ISREQUIRED": true,
         "SHORTTEXT": true,

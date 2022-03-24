@@ -108,7 +108,7 @@ class _SimpleText extends State<SimpleText> {
                         return DropdownMenuItem(
                             value: data, child: Text(data['KEY']));
                       }).toList(),
-                      hint: const Text("Birim Seçiniz"),
+                      hint: const Text("Seçiniz"),
                       value: secilenUnit,
                       validator: (value) {
                         if (value == "" || value == null) {
@@ -118,8 +118,7 @@ class _SimpleText extends State<SimpleText> {
                         }
                       },
                       decoration: const InputDecoration(
-                        errorStyle: TextStyle(fontSize: 0.01),
-                      ),
+                          errorStyle: TextStyle(fontSize: 0.01)),
                       onChanged: (value) {
                         print(value);
                         setState(() {
@@ -167,6 +166,13 @@ class _SimpleText extends State<SimpleText> {
                                 Expanded(
                                   flex: 12,
                                   child: TextFormField(
+                                    validator: (value) {
+                                      if (value == "" || value == null) {
+                                        return "";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
                                     textAlign: item["ISNUMERIC"]
                                         ? TextAlign.right
                                         : TextAlign.left,
@@ -222,6 +228,13 @@ class _SimpleText extends State<SimpleText> {
                           Expanded(
                             flex: 83,
                             child: TextFormField(
+                              validator: (value) {
+                                if (value == "" || value == null) {
+                                  return "";
+                                } else {
+                                  return null;
+                                }
+                              },
                               textAlign: item["ISNUMERIC"]
                                   ? TextAlign.right
                                   : TextAlign.left,
