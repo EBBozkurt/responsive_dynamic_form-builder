@@ -31,10 +31,26 @@ class SimpleText extends StatefulWidget {
 class _SimpleText extends State<SimpleText> {
   dynamic item;
   var secilenUnit;
+  List<dynamic> UnitDDListesi = [];
+
+  TextEditingController textFormFieldController = TextEditingController();
+
   @override
   void initState() {
-    super.initState();
     item = widget.item;
+
+    if (item["VALUE"] != "") {
+      textFormFieldController.text = item["VALUE"];
+    }
+
+    if (item['UNITVALUE'] != "") {
+      if (item['UNIT']['DATASOURCE'] != "") {
+        UnitDDListesi = item['UNIT']['DATASOURCE'];
+        secilenUnit = UnitDDListesi.singleWhere(
+            (element) => element["KEY"] == item['UNITVALUE']);
+      }
+    }
+    super.initState();
   }
 
   @override
@@ -85,18 +101,18 @@ class _SimpleText extends State<SimpleText> {
     Widget unit = const SizedBox.shrink();
 
     if (item['UNIT']['DATASOURCE'] != "") {
-      List<dynamic> unitList = item['UNIT']['DATASOURCE'];
+      UnitDDListesi = item['UNIT']['DATASOURCE'];
 
       unit = Padding(
         padding: const EdgeInsets.only(left: 15),
         child: SizedBox(
           width: 200,
           height: 50,
-          child: unitList.length == 1
+          child: UnitDDListesi.length == 1
               ? Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    unitList[0]["KEY"].toString(),
+                    UnitDDListesi[0]["KEY"].toString(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16.0),
                   ),
@@ -104,7 +120,7 @@ class _SimpleText extends State<SimpleText> {
               : DropdownButtonHideUnderline(
                   child: DropdownButtonFormField(
                       isExpanded: true,
-                      items: unitList.map((data) {
+                      items: UnitDDListesi.map((data) {
                         return DropdownMenuItem(
                             value: data, child: Text(data['KEY']));
                       }).toList(),
@@ -125,8 +141,11 @@ class _SimpleText extends State<SimpleText> {
                           secilenUnit = value;
                         });
 
-                        widget.onChange(widget.position,
-                            unitValue: secilenUnit['KEY']);
+                        var formattedValue = secilenUnit['VALUE'].toString() +
+                            " - " +
+                            secilenUnit['KEY'].toString();
+
+                        widget.onChange(widget.position, value: formattedValue);
                       }),
                 ),
         ),
@@ -176,11 +195,9 @@ class _SimpleText extends State<SimpleText> {
                                     textAlign: item["ISNUMERIC"]
                                         ? TextAlign.right
                                         : TextAlign.left,
-                                    controller: null,
+                                    controller: textFormFieldController,
                                     onChanged: (String value) {
                                       item['value'] = value;
-                                      // _handleChanged();
-                                      //  print(value);
 
                                       widget.onChange(widget.position,
                                           value: value);
@@ -238,11 +255,9 @@ class _SimpleText extends State<SimpleText> {
                               textAlign: item["ISNUMERIC"]
                                   ? TextAlign.right
                                   : TextAlign.left,
-                              controller: null,
+                              controller: textFormFieldController,
                               onChanged: (String value) {
                                 item['value'] = value;
-                                // _handleChanged();
-                                //  print(value);
 
                                 widget.onChange(widget.position, value: value);
                               },

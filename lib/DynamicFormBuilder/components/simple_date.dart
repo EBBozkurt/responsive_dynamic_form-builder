@@ -35,6 +35,10 @@ class _SimpleDate extends State<SimpleDate> {
     super.initState();
     dateController.text = DateTime.now().toString();
     item = widget.item;
+
+    if (item["VALUE"] != "") {
+      dateController.text = item["VALUE"];
+    }
   }
 
   @override
@@ -109,11 +113,9 @@ class _SimpleDate extends State<SimpleDate> {
                         firstDate: DateTime(2000),
                         lastDate: DateTime.now(),
                         onSaved: (value) {
-                          item['value'] = value;
                           widget.onChange(widget.position, value: value);
                         },
                         onChanged: (value) {
-                          item['value'] = value;
                           widget.onChange(widget.position, value: value);
                         },
                         validator: (value) {

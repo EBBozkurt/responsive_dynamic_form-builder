@@ -40,10 +40,9 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
   void initState() {
     super.initState();
     item = widget.item;
+    //TODO: EDİTTE SETLEME
     for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
-      if (item['VALUEDATASOURCE'][i]['VALUE'] == true) {
-        selectItems.add(i);
-      }
+      selectItems.add(i);
     }
   }
 
@@ -68,6 +67,7 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
         ),
       );
     }
+    //TODO: Checkbox validasyon kontrolü
     List<Widget> checkboxes = [];
     if (Fun.labelHidden(item)) {
       checkboxes.add(Column(

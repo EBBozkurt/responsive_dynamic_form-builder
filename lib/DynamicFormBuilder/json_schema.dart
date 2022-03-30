@@ -52,10 +52,10 @@ class _CoreFormState extends State<JsonSchema> {
   void onChange(int position, {dynamic value, dynamic unitValue}) {
     setState(() {
       if (value != null) {
-        formGeneral['fields'][position]['value'] = value;
+        formGeneral['fields'][position]['USERINPUTVALUE'] = value;
       }
       if (unitValue != null) {
-        formGeneral['fields'][position]['UnitValue'] = unitValue;
+        formGeneral['fields'][position]['USERINPUTUNITVALUE'] = unitValue;
       }
       _handleChanged();
     });

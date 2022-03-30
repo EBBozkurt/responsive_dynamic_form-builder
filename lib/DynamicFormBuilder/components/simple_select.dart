@@ -31,12 +31,26 @@ class SimpleSelect extends StatefulWidget {
 class _SimpleSelect extends State<SimpleSelect> {
   dynamic item;
   List<dynamic> DDListesi = [];
+  List<dynamic> UnitDDListesi = [];
   var secilenItem, secilenUnit;
 
   @override
   void initState() {
     item = widget.item;
     DDListesi = item['VALUEDATASOURCE'];
+
+    if (item["VALUE"] != "") {
+      secilenItem =
+          DDListesi.singleWhere((element) => element["VALUE"] == item['VALUE']);
+    }
+
+    if (item['UNITVALUE'] != "") {
+      if (item['UNIT']['DATASOURCE'] != "") {
+        UnitDDListesi = item['UNIT']['DATASOURCE'];
+        secilenUnit = UnitDDListesi.singleWhere(
+            (element) => element["KEY"] == item['UNITVALUE']);
+      }
+    }
 
     super.initState();
   }
@@ -90,18 +104,18 @@ class _SimpleSelect extends State<SimpleSelect> {
     Widget unit = const SizedBox.shrink();
 
     if (item['UNIT']['DATASOURCE'] != "") {
-      List<dynamic> unitList = item['UNIT']['DATASOURCE'];
+      UnitDDListesi = item['UNIT']['DATASOURCE'];
 
       unit = Padding(
         padding: const EdgeInsets.only(left: 15),
         child: SizedBox(
           width: 200,
           height: 50,
-          child: unitList.length == 1
+          child: UnitDDListesi.length == 1
               ? Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    unitList[0]["KEY"].toString(),
+                    UnitDDListesi[0]["KEY"].toString(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16.0),
                   ),
@@ -109,7 +123,7 @@ class _SimpleSelect extends State<SimpleSelect> {
               : DropdownButtonHideUnderline(
                   child: DropdownButtonFormField(
                       isExpanded: true,
-                      items: unitList.map((data) {
+                      items: UnitDDListesi.map((data) {
                         return DropdownMenuItem(
                             value: data, child: Text(data['KEY']));
                       }).toList(),
@@ -131,8 +145,11 @@ class _SimpleSelect extends State<SimpleSelect> {
                           secilenUnit = value;
                         });
 
-                        widget.onChange(widget.position,
-                            unitValue: secilenUnit['KEY']);
+                        var formattedValue = secilenUnit['VALUE'].toString() +
+                            " - " +
+                            secilenUnit['KEY'].toString();
+
+                        widget.onChange(widget.position, value: formattedValue);
                       }),
                 ),
         ),
