@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
 import 'package:flutter/material.dart';
 
 import '../functions.dart';
@@ -39,18 +40,24 @@ class _SimpleText extends State<SimpleText> {
   void initState() {
     item = widget.item;
 
-    if (item["VALUE"] != "") {
-      textFormFieldController.text = item["VALUE"];
-    }
+    // if (item["VALUE"] != "") {
+    //   textFormFieldController.text = item["VALUE"];
+    // }
 
-    if (item['UNITVALUE'] != "") {
-      if (item['UNIT']['DATASOURCE'] != "") {
-        UnitDDListesi = item['UNIT']['DATASOURCE'];
-        secilenUnit = UnitDDListesi.singleWhere(
-            (element) => element["KEY"] == item['UNITVALUE']);
-      }
-    }
+    // if (item['UNITVALUE'] != "") {
+    //   if (item['UNIT']['DATASOURCE'] != "") {
+    //     UnitDDListesi = item['UNIT']['DATASOURCE'];
+    //     secilenUnit = UnitDDListesi.singleWhere(
+    //         (element) => element["KEY"] == item['UNITVALUE']);
+    //   }
+    // }
     super.initState();
+  }
+
+  //UnitValue Dropdown'nundan gelen veriyi setlememize yarıyan fonksiyon
+  void unitValueOnChange(dynamic unitValue) {
+    widget.onChange(widget.position, unitValue: unitValue);
+    print("Unit Value Değişti");
   }
 
   @override
@@ -78,7 +85,6 @@ class _SimpleText extends State<SimpleText> {
     Widget label = const SizedBox.shrink();
     if (Fun.labelHidden(item)) {
       label = Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -87,14 +93,17 @@ class _SimpleText extends State<SimpleText> {
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
-              Text(
-                item['LABEL'],
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16.0),
+              Expanded(
+                child: Text(
+                  item['LABEL'],
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16.0),
+                ),
               ),
             ],
           ),
-          infoLabel
+          infoLabel,
+          const SizedBox(width: 15),
         ],
       );
     }
@@ -106,49 +115,9 @@ class _SimpleText extends State<SimpleText> {
       unit = Padding(
         padding: const EdgeInsets.only(left: 15),
         child: SizedBox(
-          width: 200,
-          height: 50,
-          child: UnitDDListesi.length == 1
-              ? Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    UnitDDListesi[0]["KEY"].toString(),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16.0),
-                  ),
-                )
-              : DropdownButtonHideUnderline(
-                  child: DropdownButtonFormField(
-                      isExpanded: true,
-                      items: UnitDDListesi.map((data) {
-                        return DropdownMenuItem(
-                            value: data, child: Text(data['KEY']));
-                      }).toList(),
-                      hint: const Text("Seçiniz"),
-                      value: secilenUnit,
-                      validator: (value) {
-                        if (value == "" || value == null) {
-                          return "";
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: const InputDecoration(
-                          errorStyle: TextStyle(fontSize: 0.01)),
-                      onChanged: (value) {
-                        print(value);
-                        setState(() {
-                          secilenUnit = value;
-                        });
-
-                        var formattedValue = secilenUnit['VALUE'].toString() +
-                            " - " +
-                            secilenUnit['KEY'].toString();
-
-                        widget.onChange(widget.position, value: formattedValue);
-                      }),
-                ),
-        ),
+            width: 200,
+            height: 50,
+            child: SimpleUnitSelect(item: item, onChange: unitValueOnChange)),
       );
     }
 
@@ -171,13 +140,9 @@ class _SimpleText extends State<SimpleText> {
                       Row(
                         children: [
                           Expanded(
-                              flex: 16,
-                              child: Row(
-                                children: [
-                                  label,
-                                  const SizedBox(width: 15),
-                                ],
-                              )),
+                            flex: 16,
+                            child: label,
+                          ),
                           Expanded(
                             flex: 4,
                             child: Row(
@@ -234,12 +199,7 @@ class _SimpleText extends State<SimpleText> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        children: [
-                          label,
-                          const SizedBox(height: 15),
-                        ],
-                      ),
+                      label,
                       Row(
                         children: [
                           Expanded(

@@ -139,20 +139,4 @@ class _SimpleDate extends State<SimpleDate> {
       ],
     );
   }
-
-  Future selectDate() async {
-    DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now().subtract(const Duration(days: 360)),
-        firstDate: DateTime.now().subtract(const Duration(days: 360)),
-        lastDate: DateTime.now().add(const Duration(days: 360)));
-    if (picked != null) {
-      String date =
-          "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
-      setState(() {
-        item['value'] = date;
-        widget.onChange(widget.position, date);
-      });
-    }
-  }
 }

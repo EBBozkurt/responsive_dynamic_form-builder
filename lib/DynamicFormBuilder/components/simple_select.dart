@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names
 
+import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
 import 'package:flutter/material.dart';
 
 import '../functions.dart';
@@ -39,20 +40,28 @@ class _SimpleSelect extends State<SimpleSelect> {
     item = widget.item;
     DDListesi = item['VALUEDATASOURCE'];
 
-    if (item["VALUE"] != "") {
-      secilenItem =
-          DDListesi.singleWhere((element) => element["VALUE"] == item['VALUE']);
-    }
+    ///TODO: DropDownButton'un default value'si var ise gösterilecek kısım
+    // if (item["VALUE"] != "") {
+    //   secilenItem =
+    //       DDListesi.singleWhere((element) => element["VALUE"] == item['VALUE']);
+    // }
 
-    if (item['UNITVALUE'] != "") {
-      if (item['UNIT']['DATASOURCE'] != "") {
-        UnitDDListesi = item['UNIT']['DATASOURCE'];
-        secilenUnit = UnitDDListesi.singleWhere(
-            (element) => element["KEY"] == item['UNITVALUE']);
-      }
-    }
+    ///TODO: UNIT VALUE'NUN default value'si var ise gösterilecek kısım
+    // if (item['UNITVALUE'] != "") {
+    //   if (item['UNIT']['DATASOURCE'] != "") {
+    //     UnitDDListesi = item['UNIT']['DATASOURCE'];
+    //     secilenUnit = UnitDDListesi.singleWhere(
+    //         (element) => element["KEY"] == item['UNITVALUE']);
+    //   }
+    //}
 
     super.initState();
+  }
+
+  //UnitValue Dropdown'nundan gelen veriyi setlememize yarıyan fonksiyon
+  void unitValueOnChange(dynamic unitValue) {
+    widget.onChange(widget.position, unitValue: unitValue);
+    print("Unit Value Değişti");
   }
 
   @override
@@ -109,50 +118,9 @@ class _SimpleSelect extends State<SimpleSelect> {
       unit = Padding(
         padding: const EdgeInsets.only(left: 15),
         child: SizedBox(
-          width: 200,
-          height: 50,
-          child: UnitDDListesi.length == 1
-              ? Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    UnitDDListesi[0]["KEY"].toString(),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16.0),
-                  ),
-                )
-              : DropdownButtonHideUnderline(
-                  child: DropdownButtonFormField(
-                      isExpanded: true,
-                      items: UnitDDListesi.map((data) {
-                        return DropdownMenuItem(
-                            value: data, child: Text(data['KEY']));
-                      }).toList(),
-                      hint: const Text("Seçiniz"),
-                      value: secilenUnit,
-                      validator: (value) {
-                        if (value == "" || value == null) {
-                          return "";
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: const InputDecoration(
-                        errorStyle: TextStyle(fontSize: 0.01),
-                      ),
-                      onChanged: (value) {
-                        print(value);
-                        setState(() {
-                          secilenUnit = value;
-                        });
-
-                        var formattedValue = secilenUnit['VALUE'].toString() +
-                            " - " +
-                            secilenUnit['KEY'].toString();
-
-                        widget.onChange(widget.position, value: formattedValue);
-                      }),
-                ),
-        ),
+            width: 200,
+            height: 50,
+            child: SimpleUnitSelect(item: item, onChange: unitValueOnChange)),
       );
     }
 
