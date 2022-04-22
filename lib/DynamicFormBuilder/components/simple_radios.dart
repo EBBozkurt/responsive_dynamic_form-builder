@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../functions.dart';
 
 class SimpleRadios extends StatefulWidget {
   const SimpleRadios({
@@ -62,29 +61,28 @@ class _SimpleRadios extends State<SimpleRadios> {
       );
     }
     Widget label = const SizedBox.shrink();
-    if (Fun.labelHidden(item)) {
-      label = Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                item['ROWNUMBER'].toString() + "   ",
+
+    label = Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              item['ROWNUMBER'].toString() + "   ",
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            ),
+            Expanded(
+              child: Text(
+                item['LABEL'],
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
-              Expanded(
-                child: Text(
-                  item['LABEL'],
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 16.0),
-                ),
-              ),
-            ],
-          ),
-          infoLabel
-        ],
-      );
-    }
+            ),
+          ],
+        ),
+        infoLabel
+      ],
+    );
 
     Widget sectionPadding = const SizedBox.shrink();
 

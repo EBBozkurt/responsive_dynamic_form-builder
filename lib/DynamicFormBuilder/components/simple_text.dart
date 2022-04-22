@@ -3,7 +3,6 @@
 import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
 import 'package:flutter/material.dart';
 
-import '../functions.dart';
 import 'package:flutter/services.dart';
 
 class SimpleText extends StatefulWidget {
@@ -83,30 +82,30 @@ class _SimpleText extends State<SimpleText> {
     }
 
     Widget label = const SizedBox.shrink();
-    if (Fun.labelHidden(item)) {
-      label = Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                item['ROWNUMBER'].toString() + "   ",
+
+    label = Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              item['ROWNUMBER'].toString() + "   ",
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            ),
+            Expanded(
+              child: Text(
+                item['LABEL'],
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
-              Expanded(
-                child: Text(
-                  item['LABEL'],
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 16.0),
-                ),
-              ),
-            ],
-          ),
-          infoLabel,
-          const SizedBox(width: 15),
-        ],
-      );
-    }
+            ),
+          ],
+        ),
+        infoLabel,
+        const SizedBox(width: 15),
+      ],
+    );
+
     Widget unit = const SizedBox.shrink();
 
     if (item['UNIT']['DATASOURCE'] != "") {

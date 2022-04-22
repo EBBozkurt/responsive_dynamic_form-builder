@@ -3,8 +3,6 @@
 import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
 import 'package:flutter/material.dart';
 
-import '../functions.dart';
-
 class SimpleSelect extends StatefulWidget {
   const SimpleSelect({
     Key? key,
@@ -87,29 +85,29 @@ class _SimpleSelect extends State<SimpleSelect> {
     }
 
     Widget label = const SizedBox.shrink();
-    if (Fun.labelHidden(item)) {
-      label = Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                item['ROWNUMBER'].toString() + "   ",
+
+    label = Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              item['ROWNUMBER'].toString() + "   ",
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            ),
+            Expanded(
+              child: Text(
+                item['LABEL'],
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
-              Expanded(
-                child: Text(
-                  item['LABEL'],
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 16.0),
-                ),
-              ),
-            ],
-          ),
-          infoLabel
-        ],
-      );
-    }
+            ),
+          ],
+        ),
+        infoLabel
+      ],
+    );
+
     Widget unit = const SizedBox.shrink();
 
     if (item['UNIT']['DATASOURCE'] != "") {

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../functions.dart';
-
 class SimpleListCheckbox extends StatefulWidget {
   const SimpleListCheckbox({
     Key? key,
@@ -69,27 +67,25 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
     }
     //TODO: Checkbox validasyon kontrolü
     List<Widget> checkboxes = [];
-    if (Fun.labelHidden(item)) {
-      checkboxes.add(Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                item['ROWNUMBER'].toString() + "   ",
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16.0),
-              ),
-              Text(
-                item['LABEL'],
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16.0),
-              ),
-            ],
-          ),
-          infoLabel
-        ],
-      ));
-    }
+    checkboxes.add(Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              item['ROWNUMBER'].toString() + "   ",
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            ),
+            Text(
+              item['LABEL'],
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            ),
+          ],
+        ),
+        infoLabel
+      ],
+    ));
     Widget sectionPadding = const SizedBox.shrink();
 
     if (item['TABLEVEL'] != 0) {

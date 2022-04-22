@@ -1,8 +1,6 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
-import '../functions.dart';
-
 class SimpleDate extends StatefulWidget {
   const SimpleDate({
     Key? key,
@@ -63,29 +61,27 @@ class _SimpleDate extends State<SimpleDate> {
       );
     }
     Widget label = const SizedBox.shrink();
-    if (Fun.labelHidden(item)) {
-      label = Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                item['ROWNUMBER'].toString() + "   ",
+    label = Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              item['ROWNUMBER'].toString() + "   ",
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            ),
+            Expanded(
+              child: Text(
+                item['LABEL'],
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
-              Expanded(
-                child: Text(
-                  item['LABEL'],
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 16.0),
-                ),
-              ),
-            ],
-          ),
-          infoLabel
-        ],
-      );
-    }
+            ),
+          ],
+        ),
+        infoLabel
+      ],
+    );
     Widget sectionPadding = const SizedBox.shrink();
 
     if (item['TABLEVEL'] != 0) {

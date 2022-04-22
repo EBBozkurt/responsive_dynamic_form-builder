@@ -5,14 +5,14 @@ import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/treeFromJso
 import 'package:dynamic_form_builder/DynamicFormBuilder/json_schema.dart';
 import 'package:flutter/material.dart';
 
-class Deneme extends StatefulWidget {
-  const Deneme({Key? key}) : super(key: key);
+class DynamicFormBuilder extends StatefulWidget {
+  const DynamicFormBuilder({Key? key}) : super(key: key);
 
   @override
-  _AktifCalismalarPageState createState() => _AktifCalismalarPageState();
+  _DynamicFormBuilderState createState() => _DynamicFormBuilderState();
 }
 
-class _AktifCalismalarPageState extends State<Deneme> {
+class _DynamicFormBuilderState extends State<DynamicFormBuilder> {
   Widget formWidget = const SizedBox.shrink();
 
   String form = json.encode({

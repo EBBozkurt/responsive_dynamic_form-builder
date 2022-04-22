@@ -1,4 +1,4 @@
-import 'package:dynamic_form_builder/DynamicFormBuilder/deneme.dart';
+import 'package:dynamic_form_builder/DynamicFormBuilder/dynamic_form_builder.dart';
 import 'package:flutter/material.dart';
 
 //NOT:
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: const Deneme(),
+      home: const DynamicFormBuilder(),
       theme: themeData(),
     );
   }
