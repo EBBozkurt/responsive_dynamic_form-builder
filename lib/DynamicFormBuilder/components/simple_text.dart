@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
+import 'package:dynamic_form_builder/global_functions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -33,6 +34,16 @@ class _SimpleText extends State<SimpleText> {
   var secilenUnit;
   List<dynamic> UnitDDListesi = [];
 
+  int webExpandedShortTextValue1 = 16;
+  int webExpandedShortTextValue2 = 4;
+  int webExpandedLongTextValue1 = 83;
+  int webExpandedLongTextValue2 = 7;
+
+  int mobileExpandedShortTextValue1 = 6;
+  int mobileExpandedShortTextValue2 = 4;
+  int mobileExpandedLongValue1 = 37;
+  int mobileExpandedLongValue2 = 8;
+
   TextEditingController textFormFieldController = TextEditingController();
 
   @override
@@ -61,6 +72,7 @@ class _SimpleText extends State<SimpleText> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     Widget infoLabel = const SizedBox.shrink();
 
     if (item['INFORMATIONTEXT'] != "") {
@@ -139,11 +151,15 @@ class _SimpleText extends State<SimpleText> {
                       Row(
                         children: [
                           Expanded(
-                            flex: 16,
+                            flex: globalFunctions.isMobilePhone()
+                                ? mobileExpandedShortTextValue1
+                                : webExpandedShortTextValue1,
                             child: label,
                           ),
                           Expanded(
-                            flex: 4,
+                            flex: globalFunctions.isMobilePhone()
+                                ? mobileExpandedShortTextValue2
+                                : webExpandedShortTextValue2,
                             child: Row(
                               children: [
                                 Expanded(
@@ -173,9 +189,6 @@ class _SimpleText extends State<SimpleText> {
                                           : FilteringTextInputFormatter.allow(
                                               RegExp('[a-zA-Z0-9ÇçğĞİüÜöÖ.,:]'))
                                     ],
-                                    obscureText: item['TYPE'] == "Password"
-                                        ? true
-                                        : false,
                                     keyboardType: item['ISNUMERIC']
                                         ? TextInputType.number
                                         : TextInputType.text,
@@ -202,7 +215,9 @@ class _SimpleText extends State<SimpleText> {
                       Row(
                         children: [
                           Expanded(
-                            flex: 83,
+                            flex: globalFunctions.isMobilePhone()
+                                ? mobileExpandedLongValue1
+                                : webExpandedLongTextValue1,
                             child: TextFormField(
                               validator: (value) {
                                 if (value == "" || value == null) {
@@ -227,14 +242,16 @@ class _SimpleText extends State<SimpleText> {
                                     : FilteringTextInputFormatter.allow(
                                         RegExp(""))
                               ],
-                              obscureText:
-                                  item['TYPE'] == "Password" ? true : false,
                               keyboardType: item['ISNUMERIC']
                                   ? TextInputType.number
                                   : TextInputType.text,
                             ),
                           ),
-                          Expanded(flex: 7, child: unit)
+                          Expanded(
+                              flex: globalFunctions.isMobilePhone()
+                                  ? mobileExpandedLongValue2
+                                  : webExpandedLongTextValue2,
+                              child: unit)
                         ],
                       ),
                       Divider(

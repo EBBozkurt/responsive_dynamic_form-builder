@@ -1,4 +1,5 @@
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:dynamic_form_builder/global_functions.dart';
 import 'package:flutter/material.dart';
 
 class SimpleDate extends StatefulWidget {
@@ -27,6 +28,16 @@ class SimpleDate extends StatefulWidget {
 class _SimpleDate extends State<SimpleDate> {
   dynamic item;
   TextEditingController dateController = TextEditingController();
+
+  int webExpandedValue1 = 16;
+  int webExpandedValue2 = 4;
+  int webExpandedValue3 = 12;
+  int webExpandedValue4 = 8;
+
+  int mobileExpandedValue1 = 6;
+  int mobileExpandedValue2 = 4;
+  int mobileExpandedValue3 = 6;
+  int mobileExpandedValue4 = 4;
 
   @override
   void initState() {
@@ -93,13 +104,21 @@ class _SimpleDate extends State<SimpleDate> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(flex: 16, child: label),
             Expanded(
-              flex: 4,
+                flex: globalFunctions.isMobilePhone()
+                    ? mobileExpandedValue1
+                    : webExpandedValue1,
+                child: label),
+            Expanded(
+              flex: globalFunctions.isMobilePhone()
+                  ? mobileExpandedValue2
+                  : webExpandedValue2,
               child: Row(
                 children: [
                   Expanded(
-                    flex: 12,
+                    flex: globalFunctions.isMobilePhone()
+                        ? mobileExpandedValue3
+                        : webExpandedValue3,
                     child: DateTimePicker(
                         textAlignVertical: TextAlignVertical.top,
                         readOnly: item['READONLY'],
@@ -122,7 +141,11 @@ class _SimpleDate extends State<SimpleDate> {
                           }
                         }),
                   ),
-                  const Expanded(flex: 8, child: SizedBox())
+                  Expanded(
+                      flex: globalFunctions.isMobilePhone()
+                          ? mobileExpandedValue4
+                          : webExpandedValue4,
+                      child: const SizedBox())
                 ],
               ),
             ),

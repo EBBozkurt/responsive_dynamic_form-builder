@@ -3,7 +3,9 @@
 import 'dart:convert';
 import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/treeFromJson.dart';
 import 'package:dynamic_form_builder/DynamicFormBuilder/json_schema.dart';
+import 'package:dynamic_form_builder/global_functions.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
 class DynamicFormBuilder extends StatefulWidget {
   const DynamicFormBuilder({Key? key}) : super(key: key);
@@ -543,10 +545,13 @@ class _DynamicFormBuilderState extends State<DynamicFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return _aktifCalismalarBody();
+    double screenWidth = MediaQuery.of(context).size.width;
+    return globalFunctions.isMobilePhone()
+        ? _dynamicFormBuilderBodyForMobile()
+        : _dynamicFormBuilderBodyForWeb();
   }
 
-  Widget _aktifCalismalarBody() {
+  Widget _dynamicFormBuilderBodyForWeb() {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -569,6 +574,35 @@ class _DynamicFormBuilderState extends State<DynamicFormBuilder> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _dynamicFormBuilderBodyForMobile() {
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        title: const Text("Dinamik Form Builder"),
+      ),
+      body: Column(
+        children: [
+          TreeFromJson(onChange: formOnChange),
+          Divider(
+            thickness: 4,
+            height: 10,
+            color: Colors.grey.shade500,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Expanded(
+                  child: formWidget,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

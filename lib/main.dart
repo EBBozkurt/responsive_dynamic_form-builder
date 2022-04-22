@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Dynamic Form Builder',
       debugShowCheckedModeBanner: false,
       home: const DynamicFormBuilder(),
       theme: themeData(),
@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         //Bu kısım validasyonların TextFormField Widget'ının zıplamamasını sağlaması için var.
         errorStyle: const TextStyle(fontSize: 0.01),
+
         //https://stackoverflow.com/a/69879565/15323475
         //Bu kısım validasyonların TextFormField Widget'ının zıplamamasını sağlaması için var.
       ),

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names
 
 import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
+import 'package:dynamic_form_builder/global_functions.dart';
 import 'package:flutter/material.dart';
 
 class SimpleSelect extends StatefulWidget {
@@ -32,6 +33,16 @@ class _SimpleSelect extends State<SimpleSelect> {
   List<dynamic> DDListesi = [];
   List<dynamic> UnitDDListesi = [];
   var secilenItem, secilenUnit;
+
+  int webExpandedValue1 = 16;
+  int webExpandedValue2 = 4;
+  int webExpandedValue3 = 12;
+  int webExpandedValue4 = 8;
+
+  int mobileExpandedValue1 = 6;
+  int mobileExpandedValue2 = 4;
+  int mobileExpandedValue3 = 6;
+  int mobileExpandedValue4 = 4;
 
   @override
   void initState() {
@@ -132,13 +143,21 @@ class _SimpleSelect extends State<SimpleSelect> {
       child: Row(
         children: [
           sectionPadding,
-          Expanded(flex: 16, child: label),
           Expanded(
-            flex: 4,
+              flex: globalFunctions.isMobilePhone()
+                  ? mobileExpandedValue1
+                  : webExpandedValue1,
+              child: label),
+          Expanded(
+            flex: globalFunctions.isMobilePhone()
+                ? mobileExpandedValue2
+                : webExpandedValue2,
             child: Row(
               children: [
                 Expanded(
-                  flex: 12,
+                  flex: globalFunctions.isMobilePhone()
+                      ? mobileExpandedValue3
+                      : webExpandedValue3,
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField(
                         isExpanded: true,
@@ -172,7 +191,11 @@ class _SimpleSelect extends State<SimpleSelect> {
                         }),
                   ),
                 ),
-                Expanded(flex: 8, child: unit)
+                Expanded(
+                    flex: globalFunctions.isMobilePhone()
+                        ? mobileExpandedValue4
+                        : webExpandedValue4,
+                    child: unit)
               ],
             ),
           ),
