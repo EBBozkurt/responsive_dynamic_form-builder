@@ -23,11 +23,18 @@ class _SimpleUnitSelect extends State<SimpleUnitSelect> {
   @override
   void initState() {
     item = widget.item;
-    if (item['UNIT']['DATASOURCE'] != "") {
-      UnitDDListesi = item['UNIT']['DATASOURCE'];
-      // secilenUnitItem = UnitDDListesi.singleWhere(
-      //     (element) => element["KEY"] == item['UNITVALUE']);
-    }
+
+    UnitDDListesi = item['UNITDATASOURCE'];
+    // secilenUnitItem = UnitDDListesi.singleWhere(
+    //     (element) => element["KEY"] == item['UNITVALUE']);
+
+    // if (item['UNITVALUE'] != "") {
+    //   if (item['UNIT']['DATASOURCE'] != "") {
+    //     UnitDDListesi = item['UNIT']['DATASOURCE'];
+    //     secilenUnit = UnitDDListesi.singleWhere(
+    //         (element) => element["KEY"] == item['UNITVALUE']);
+    //   }
+    // }
 
     super.initState();
   }

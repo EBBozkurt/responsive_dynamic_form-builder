@@ -33,7 +33,7 @@ class _SimpleSectionHeader extends State<SimpleSectionHeader> {
   @override
   Widget build(BuildContext context) {
     Widget smallSectionHeader = const SizedBox.shrink();
-    if (item['VALUE'] == "Small Section Header") {
+    if (item['SECTIONHEADER'] == "SMALL") {
       smallSectionHeader = Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -54,7 +54,7 @@ class _SimpleSectionHeader extends State<SimpleSectionHeader> {
 
     Widget bigSectionHeader = const SizedBox.shrink();
 
-    if (item['VALUE'] == "Big Section Header") {
+    if (item['SECTIONHEADER'] == "BIG") {
       bigSectionHeader = Container(
         padding: const EdgeInsets.all(10),
         color: Colors.amberAccent,

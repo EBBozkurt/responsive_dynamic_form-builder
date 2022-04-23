@@ -102,12 +102,19 @@ class _CoreFormState extends State<JsonSchema> {
     for (var count = 0; count < formGeneral['fields'].length; count++) {
       Map item = formGeneral['fields'][count];
 
+//    Çoktan Seçmeli (Radio)
+//    Çoktan Seçmeli (DD)
+//    Çoktan Seçmeli (Çoklu)
+//    Serbest Metin
+//    Sayısal Değer            --tek bir noktaya izin verilecek
+//    Sayısal Değer (Tam sayı) --rakam dışında bir şeye izin verme
+//    Tarih/Saat
+//    Tekil Dosya Ek
+//    Çoklu Dosya Ek
+
       if (item['TYPE'] == "Sayısal Değer" ||
           item['TYPE'] == "Serbest Metin" ||
-          item['TYPE'] == "Tam Sayı" ||
-          item['TYPE'] == "Input" ||
-          item['TYPE'] == "Password" ||
-          item['TYPE'] == "Email") {
+          item['TYPE'] == "Sayısal Değer (Tam sayı)") {
         listWidget.add(SimpleText(
           item: item,
           onChange: onChange,
@@ -119,7 +126,7 @@ class _CoreFormState extends State<JsonSchema> {
         ));
       }
 
-      if (item['TYPE'] == "Çoktan Seçmeli") {
+      if (item['TYPE'] == "Çoktan Seçmeli (DD)") {
         listWidget.add(SimpleSelect(
           item: item,
           onChange: onChange,
@@ -143,7 +150,7 @@ class _CoreFormState extends State<JsonSchema> {
         ));
       }
 
-      if (item['TYPE'] == "RadioButton") {
+      if (item['TYPE'] == "Çoktan Seçmeli (Radio)") {
         listWidget.add(SimpleRadios(
           item: item,
           onChange: onChange,
@@ -167,7 +174,7 @@ class _CoreFormState extends State<JsonSchema> {
         ));
       }
 
-      if (item['TYPE'] == "Checkbox") {
+      if (item['TYPE'] == "Çoktan Seçmeli (Çoklu)") {
         listWidget.add(SimpleListCheckbox(
           item: item,
           onChange: onChange,
@@ -179,7 +186,7 @@ class _CoreFormState extends State<JsonSchema> {
         ));
       }
 
-      if (item['TYPE'] == "SectionHeader") {
+      if (item['SECTIONHEADER'] != "NONE") {
         listWidget.add(SimpleSectionHeader(
           item: item,
           decorations: widget.decorations,

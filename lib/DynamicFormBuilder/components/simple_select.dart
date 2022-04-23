@@ -102,7 +102,7 @@ class _SimpleSelect extends State<SimpleSelect> {
         Row(
           children: [
             Text(
-              item['ROWNUMBER'].toString() + "   ",
+              item['ROWNUMBERTEXT'].toString() + "   ",
               style:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
@@ -120,10 +120,8 @@ class _SimpleSelect extends State<SimpleSelect> {
     );
 
     Widget unit = const SizedBox.shrink();
-
-    if (item['UNIT']['DATASOURCE'] != "") {
-      UnitDDListesi = item['UNIT']['DATASOURCE'];
-
+    List tempUnitList = item['UNITDATASOURCE'];
+    if (tempUnitList.isNotEmpty) {
       unit = Padding(
         padding: const EdgeInsets.only(left: 15),
         child: SizedBox(

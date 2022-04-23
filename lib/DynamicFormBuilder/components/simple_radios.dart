@@ -26,13 +26,6 @@ class SimpleRadios extends StatefulWidget {
 class _SimpleRadios extends State<SimpleRadios> {
   dynamic item;
 
-  String? isRequired(item, value) {
-    if (value.isEmpty) {
-      return widget.errorMessages[item['key']] ?? 'Please enter some text';
-    }
-    return null;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -67,7 +60,7 @@ class _SimpleRadios extends State<SimpleRadios> {
         Row(
           children: [
             Text(
-              item['ROWNUMBER'].toString() + "   ",
+              item['ROWNUMBERTEXT'].toString() + "   ",
               style:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),

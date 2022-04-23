@@ -32,7 +32,6 @@ class SimpleText extends StatefulWidget {
 class _SimpleText extends State<SimpleText> {
   dynamic item;
   var secilenUnit;
-  List<dynamic> UnitDDListesi = [];
 
   int webExpandedShortTextValue1 = 16;
   int webExpandedShortTextValue2 = 4;
@@ -54,13 +53,6 @@ class _SimpleText extends State<SimpleText> {
     //   textFormFieldController.text = item["VALUE"];
     // }
 
-    // if (item['UNITVALUE'] != "") {
-    //   if (item['UNIT']['DATASOURCE'] != "") {
-    //     UnitDDListesi = item['UNIT']['DATASOURCE'];
-    //     secilenUnit = UnitDDListesi.singleWhere(
-    //         (element) => element["KEY"] == item['UNITVALUE']);
-    //   }
-    // }
     super.initState();
   }
 
@@ -100,7 +92,7 @@ class _SimpleText extends State<SimpleText> {
         Row(
           children: [
             Text(
-              item['ROWNUMBER'].toString() + "   ",
+              item['ROWNUMBERTEXT'].toString() + "   ",
               style:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
@@ -119,10 +111,8 @@ class _SimpleText extends State<SimpleText> {
     );
 
     Widget unit = const SizedBox.shrink();
-
-    if (item['UNIT']['DATASOURCE'] != "") {
-      UnitDDListesi = item['UNIT']['DATASOURCE'];
-
+    List tempUnitList = item['UNITDATASOURCE'];
+    if (tempUnitList.isNotEmpty) {
       unit = Padding(
         padding: const EdgeInsets.only(left: 15),
         child: SizedBox(
@@ -172,26 +162,41 @@ class _SimpleText extends State<SimpleText> {
                                         return null;
                                       }
                                     },
-                                    textAlign: item["ISNUMERIC"]
-                                        ? TextAlign.right
-                                        : TextAlign.left,
-                                    controller: textFormFieldController,
                                     onChanged: (String value) {
                                       item['value'] = value;
 
                                       widget.onChange(widget.position,
                                           value: value);
                                     },
+                                    textAlign: item["ALIGNMENT"] == 0
+                                        ? TextAlign.left
+                                        : item["ALIGNMENT"] == 1
+                                            ? TextAlign.center
+                                            : TextAlign.right,
+                                    controller: textFormFieldController,
                                     inputFormatters: [
-                                      item['ISNUMERIC']
+                                      item['REGEX'] != ""
                                           ? FilteringTextInputFormatter.allow(
-                                              RegExp('[0-9.:]'))
-                                          : FilteringTextInputFormatter.allow(
-                                              RegExp('[a-zA-Z0-9ÇçğĞİüÜöÖ.,:]'))
+                                              RegExp(item['REGEX']))
+                                          : item['TYPE'] == "Sayısal Değer"
+                                              ? FilteringTextInputFormatter
+                                                  .allow(RegExp('[0-9.:]'))
+                                              : item['TYPE'] ==
+                                                      "Sayısal Değer (Tam sayı)"
+                                                  ? FilteringTextInputFormatter
+                                                      .allow(RegExp('[0-9]'))
+                                                  : FilteringTextInputFormatter
+                                                      .allow(
+                                                          RegExp(item['REGEX']))
                                     ],
-                                    keyboardType: item['ISNUMERIC']
+                                    keyboardType: item['TYPE']
+                                            .toString()
+                                            .contains("Sayısal Değer")
                                         ? TextInputType.number
                                         : TextInputType.text,
+                                    maxLength: item['MAXLENGTH'] == 0
+                                        ? null
+                                        : item['MAXLENGTH'],
                                   ),
                                 ),
                                 Expanded(flex: 8, child: unit)
@@ -226,25 +231,39 @@ class _SimpleText extends State<SimpleText> {
                                   return null;
                                 }
                               },
-                              textAlign: item["ISNUMERIC"]
-                                  ? TextAlign.right
-                                  : TextAlign.left,
-                              controller: textFormFieldController,
                               onChanged: (String value) {
                                 item['value'] = value;
 
                                 widget.onChange(widget.position, value: value);
                               },
+                              textAlign: item["ALIGNMENT"] == 0
+                                  ? TextAlign.left
+                                  : item["ALIGNMENT"] == 1
+                                      ? TextAlign.center
+                                      : TextAlign.right,
+                              controller: textFormFieldController,
                               inputFormatters: [
-                                item['ISNUMERIC']
+                                item['REGEX'] != ""
                                     ? FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]'))
-                                    : FilteringTextInputFormatter.allow(
-                                        RegExp(""))
+                                        RegExp(item['REGEX']))
+                                    : item['TYPE'] == "Sayısal Değer"
+                                        ? FilteringTextInputFormatter.allow(
+                                            RegExp('[0-9.:]'))
+                                        : item['TYPE'] ==
+                                                "Sayısal Değer (Tam sayı)"
+                                            ? FilteringTextInputFormatter.allow(
+                                                RegExp('[0-9]'))
+                                            : FilteringTextInputFormatter.allow(
+                                                RegExp(item['REGEX']))
                               ],
-                              keyboardType: item['ISNUMERIC']
+                              keyboardType: item['TYPE']
+                                      .toString()
+                                      .contains("Sayısal Değer")
                                   ? TextInputType.number
                                   : TextInputType.text,
+                              maxLength: item['MAXLENGTH'] == 0
+                                  ? null
+                                  : item['MAXLENGTH'],
                             ),
                           ),
                           Expanded(

@@ -77,7 +77,7 @@ class _SimpleDate extends State<SimpleDate> {
         Row(
           children: [
             Text(
-              item['ROWNUMBER'].toString() + "   ",
+              item['ROWNUMBERTEXT'].toString() + "   ",
               style:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
