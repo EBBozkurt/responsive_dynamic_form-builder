@@ -183,6 +183,7 @@ class _SimpleSelect extends State<SimpleSelect> {
                                 secilenItem['VALUE'].toString() +
                                     " - " +
                                     secilenItem['KEY'].toString();
+
                             widget.onChange(widget.position,
                                 value: formattedValue);
                           });

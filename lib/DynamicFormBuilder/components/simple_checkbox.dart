@@ -25,23 +25,21 @@ class SimpleListCheckbox extends StatefulWidget {
 
 class _SimpleListCheckbox extends State<SimpleListCheckbox> {
   dynamic item;
-  List<dynamic> selectItems = [];
-
-  String? isRequired(item, value) {
-    if (value.isEmpty) {
-      return widget.errorMessages[item['key']] ?? 'Please enter some text';
-    }
-    return null;
-  }
+  List<dynamic> selectItems = [], selected = [];
 
   @override
   void initState() {
     super.initState();
     item = widget.item;
     //TODO: EDİTTE SETLEME
-    for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
-      selectItems.add(i);
-    }
+    // for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
+    //   selectItems.add(i);
+    // }
+
+    List tempListForSelected = item['VALUEDATASOURCE'];
+
+    selected =
+        List<bool>.generate(tempListForSelected.length, (int index) => false);
   }
 
   @override
@@ -67,6 +65,7 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
     }
     //TODO: Checkbox validasyon kontrolü
     List<Widget> checkboxes = [];
+
     checkboxes.add(Column(
       children: [
         Row(
@@ -97,10 +96,12 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
           children: <Widget>[
             const SizedBox(width: 25),
             Checkbox(
-              value: item['VALUEDATASOURCE'][i]['VALUE'],
+              value: selected[i],
               onChanged: (bool? value) {
                 setState(() {
                   item['VALUEDATASOURCE'][i]['VALUE'] = value;
+
+                  selected[i] = value;
 
                   if (value!) {
                     selectItems.add(i.toString() +
@@ -112,7 +113,6 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
                         item['VALUEDATASOURCE'][i]['KEY']);
                   }
                   widget.onChange(widget.position, value: selectItems);
-                  //_handleChanged();
                 });
               },
             ),

@@ -240,19 +240,10 @@ class _DynamicFormBuilderState extends State<DynamicFormBuilder> {
         "DISPLAYFORMAT": "",
         "VALUE": "",
         "VALUEDATASOURCE": [
-          {
-            "VALUE": false,
-            "KEY": "Bir yatak partneriniz veya oda arkadaşı yok"
-          },
-          {
-            "VALUE": false,
-            "KEY": "Diğer odada bir partneri veya oda arkadaşı var"
-          },
-          {
-            "VALUE": false,
-            "KEY": "Partneri aynı odada fakat aynı yatakta değil"
-          },
-          {"VALUE": false, "KEY": "Partner aynı yatakta"},
+          {"VALUE": 0, "KEY": "Bir yatak partneriniz veya oda arkadaşı yok"},
+          {"VALUE": 1, "KEY": "Diğer odada bir partneri veya oda arkadaşı var"},
+          {"VALUE": 2, "KEY": "Partneri aynı odada fakat aynı yatakta değil"},
+          {"VALUE": 3, "KEY": "Partner aynı yatakta"},
         ],
         "UNITVALUE": "",
         "UNITDATASOURCE": [],

@@ -162,18 +162,6 @@ class _CoreFormState extends State<JsonSchema> {
         ));
       }
 
-      if (item['TYPE'] == "Switch") {
-        listWidget.add(SimpleSwitch(
-          item: item,
-          onChange: onChange,
-          position: count,
-          decorations: widget.decorations,
-          errorMessages: widget.errorMessages,
-          validations: widget.validations,
-          keyboardTypes: widget.keyboardTypes,
-        ));
-      }
-
       if (item['TYPE'] == "Çoktan Seçmeli (Çoklu)") {
         listWidget.add(SimpleListCheckbox(
           item: item,
