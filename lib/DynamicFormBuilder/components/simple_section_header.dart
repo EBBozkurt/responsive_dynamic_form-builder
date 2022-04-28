@@ -38,7 +38,7 @@ class _SimpleSectionHeader extends State<SimpleSectionHeader> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            item['ROWNUMBER'].toString() + "   ",
+            item['ROWNUMBERTEXT'].toString() + "   ",
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
           ),
           Expanded(

@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_typing_uninitialized_variables, avoid_print
 
 import 'dart:convert';
+
 import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/treeFromJson.dart';
 import 'package:dynamic_form_builder/DynamicFormBuilder/json_schema.dart';
 import 'package:dynamic_form_builder/global_functions.dart';
@@ -290,9 +291,7 @@ class _DynamicFormBuilderState extends State<DynamicFormBuilder> {
         "INFORMATIONTEXT": "",
         "TYPE": "Serbest Metin",
         "MAXLENGTH": 0,
-
         "REGEX": "[0-9@]",
-        //"REGEX": "^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$",
         "INPUTMASK": "",
         "DISPLAYFORMAT": "",
         "VALUE": "",
@@ -328,7 +327,7 @@ class _DynamicFormBuilderState extends State<DynamicFormBuilder> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text("Dinamik Form Builder"),
+        title: const Text("Dynamic Form Builder"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -355,7 +354,7 @@ class _DynamicFormBuilderState extends State<DynamicFormBuilder> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text("Dinamik Form Builder"),
+        title: const Text("Dynamic Form Builder"),
       ),
       body: Column(
         children: [

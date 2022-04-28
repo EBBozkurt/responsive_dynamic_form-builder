@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, non_constant_identifier_names
+// ignore_for_file: avoid_print, non_constant_identifier_names, prefer_typing_uninitialized_variables
 
 import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
 import 'package:dynamic_form_builder/global_functions.dart';
@@ -34,20 +34,25 @@ class _SimpleSelect extends State<SimpleSelect> {
   List<dynamic> UnitDDListesi = [];
   var secilenItem, secilenUnit;
 
-  int webExpandedValue1 = 16;
-  int webExpandedValue2 = 4;
-  int webExpandedValue3 = 12;
-  int webExpandedValue4 = 8;
+  int webExpandedValue1 = 30;
+  int webExpandedValue2 = 10;
+  int webExpandedValue3 = 16;
+  int webExpandedValue4 = 4;
 
   int mobileExpandedValue1 = 6;
   int mobileExpandedValue2 = 4;
-  int mobileExpandedValue3 = 6;
-  int mobileExpandedValue4 = 4;
+  int mobileExpandedValue3 = 7;
+  int mobileExpandedValue4 = 3;
 
   @override
   void initState() {
     item = widget.item;
-    DDListesi = item['VALUEDATASOURCE'];
+
+    if (item['VALUEDATASOURCE'] != null) {
+      DDListesi = item['VALUEDATASOURCE'];
+    } else {
+      DDListesi = [];
+    }
 
     ///TODO: DropDownButton'un default value'si var ise gösterilecek kısım
     // if (item["VALUE"] != "") {
@@ -142,59 +147,64 @@ class _SimpleSelect extends State<SimpleSelect> {
         children: [
           sectionPadding,
           Expanded(
-              flex: globalFunctions.isMobilePhone()
-                  ? mobileExpandedValue1
-                  : webExpandedValue1,
-              child: label),
-          Expanded(
-            flex: globalFunctions.isMobilePhone()
-                ? mobileExpandedValue2
-                : webExpandedValue2,
-            child: Row(
+            child: Column(
               children: [
-                Expanded(
-                  flex: globalFunctions.isMobilePhone()
-                      ? mobileExpandedValue3
-                      : webExpandedValue3,
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButtonFormField(
-                        isExpanded: true,
-                        items: DDListesi.map((data) {
-                          return DropdownMenuItem(
-                              value: data, child: Text(data['KEY']));
-                        }).toList(),
-                        hint: const Text("Seçiniz"),
-                        value: secilenItem,
-                        validator: (value) {
-                          if (value == "" || value == null) {
-                            return "";
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: const InputDecoration(
-                          errorStyle: TextStyle(fontSize: 0.01),
-                        ),
-                        onChanged: (value) {
-                          setState(() {
-                            secilenItem = value;
+                Row(
+                  children: [
+                    Expanded(
+                        flex: globalFunctions.isMobilePhone()
+                            ? mobileExpandedValue1
+                            : webExpandedValue1,
+                        child: label),
+                    Expanded(
+                      flex: globalFunctions.isMobilePhone()
+                          ? mobileExpandedValue3
+                          : webExpandedValue3,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButtonFormField(
+                            isExpanded: true,
+                            items: DDListesi.map((data) {
+                              return DropdownMenuItem(
+                                  value: data, child: Text(data['KEY']));
+                            }).toList(),
+                            hint: const Text("Seçiniz"),
+                            value: secilenItem,
+                            validator: (value) {
+                              if (value == "" || value == null) {
+                                return "";
+                              } else {
+                                return null;
+                              }
+                            },
+                            decoration: const InputDecoration(
+                              errorStyle: TextStyle(fontSize: 0.01),
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                secilenItem = value;
 
-                            var formattedValue =
-                                secilenItem['VALUE'].toString() +
-                                    " - " +
-                                    secilenItem['KEY'].toString();
+                                var formattedValue =
+                                    secilenItem['VALUE'].toString() +
+                                        " - " +
+                                        secilenItem['KEY'].toString();
 
-                            widget.onChange(widget.position,
-                                value: formattedValue);
-                          });
-                        }),
-                  ),
+                                widget.onChange(widget.position,
+                                    value: formattedValue);
+                              });
+                            }),
+                      ),
+                    ),
+                    Expanded(
+                        flex: globalFunctions.isMobilePhone()
+                            ? mobileExpandedValue4
+                            : webExpandedValue4,
+                        child: unit)
+                  ],
                 ),
-                Expanded(
-                    flex: globalFunctions.isMobilePhone()
-                        ? mobileExpandedValue4
-                        : webExpandedValue4,
-                    child: unit)
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey[850],
+                ),
               ],
             ),
           ),

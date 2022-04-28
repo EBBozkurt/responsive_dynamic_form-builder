@@ -33,13 +33,11 @@ class JsonSchema extends StatefulWidget {
   final AutovalidateMode? autovalidateMode;
 
   @override
-  _CoreFormState createState() => _CoreFormState(formMap ?? json.decode(form));
+  _CoreFormState createState() => _CoreFormState();
 }
 
 class _CoreFormState extends State<JsonSchema> {
-  final dynamic formGeneral;
-
-  _CoreFormState(this.formGeneral);
+  dynamic formGeneral;
 
   void _handleChanged() {
     widget.onChanged(formGeneral);
@@ -64,6 +62,13 @@ class _CoreFormState extends State<JsonSchema> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    formGeneral = json.decode(widget.form);
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       autovalidateMode: widget.autovalidateMode,
@@ -80,6 +85,7 @@ class _CoreFormState extends State<JsonSchema> {
 
   List<Widget> jsonToForm() {
     List<Widget> listWidget = [];
+
     if (formGeneral['title'] != null) {
       listWidget.add(Container(
         padding: const EdgeInsets.all(10),
@@ -92,6 +98,7 @@ class _CoreFormState extends State<JsonSchema> {
         ),
       ));
     }
+
     if (formGeneral['description'] != null) {
       listWidget.add(Text(
         "  " + formGeneral['description'],
@@ -114,7 +121,7 @@ class _CoreFormState extends State<JsonSchema> {
 
       if (item['TYPE'] == "Sayısal Değer" ||
           item['TYPE'] == "Serbest Metin" ||
-          item['TYPE'] == "Sayısal Değer (Tam sayı)") {
+          item['TYPE'] == "Sayısal Değer (Tam Sayı)") {
         listWidget.add(SimpleText(
           item: item,
           onChange: onChange,

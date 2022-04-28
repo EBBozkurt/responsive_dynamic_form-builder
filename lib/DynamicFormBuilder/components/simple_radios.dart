@@ -85,21 +85,21 @@ class _SimpleRadios extends State<SimpleRadios> {
 
     List<Widget> radios = [];
 
-    int radioValue;
-    radioValue = item['VALUE'];
-
     for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
+      dynamic tempValue, tempGroupValue;
+      tempGroupValue = -1;
       radios.add(
         Expanded(
           child: Row(
             children: <Widget>[
               Radio<dynamic>(
-                  value: item['VALUEDATASOURCE'][i]['VALUE'],
-                  groupValue: radioValue,
+                  value: tempValue,
+                  groupValue: tempGroupValue,
                   onChanged: (dynamic value) {
                     setState(() {
-                      radioValue = value;
-                      item['VALUE'] = value;
+                      tempValue = value;
+                      print(tempValue);
+                      tempGroupValue = item['VALUEDATASOURCE'][i]['VALUE'];
                       widget.onChange(widget.position,
                           value:
                               item['VALUEDATASOURCE'][i]['VALUE'].toString() +
@@ -113,6 +113,7 @@ class _SimpleRadios extends State<SimpleRadios> {
         ),
       );
     }
+
     return Container(
       margin: const EdgeInsets.only(top: 5.0),
       child: Row(

@@ -104,6 +104,7 @@ class _SimpleDate extends State<SimpleDate> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            sectionPadding,
             Expanded(
                 flex: globalFunctions.isMobilePhone()
                     ? mobileExpandedValue1

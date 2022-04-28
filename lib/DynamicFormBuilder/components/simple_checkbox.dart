@@ -32,6 +32,7 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
     super.initState();
     item = widget.item;
     //TODO: EDİTTE SETLEME
+    
     // for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
     //   selectItems.add(i);
     // }
@@ -123,14 +124,22 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
     }
     return Container(
       margin: const EdgeInsets.only(top: 5.0),
-      child: Row(
+      child: Column(
         children: [
-          sectionPadding,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: checkboxes,
-            ),
+          Row(
+            children: [
+              sectionPadding,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: checkboxes,
+                ),
+              ),
+            ],
+          ),
+          Divider(
+            thickness: 1,
+            color: Colors.grey[850],
           ),
         ],
       ),

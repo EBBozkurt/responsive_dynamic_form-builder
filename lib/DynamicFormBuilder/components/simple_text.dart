@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables
 
 import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
 import 'package:dynamic_form_builder/global_functions.dart';
@@ -175,19 +175,7 @@ class _SimpleText extends State<SimpleText> {
                                             : TextAlign.right,
                                     controller: textFormFieldController,
                                     inputFormatters: [
-                                      item['REGEX'] != ""
-                                          ? FilteringTextInputFormatter.allow(
-                                              RegExp(item['REGEX']))
-                                          : item['TYPE'] == "Sayısal Değer"
-                                              ? FilteringTextInputFormatter
-                                                  .allow(RegExp('[0-9.:]'))
-                                              : item['TYPE'] ==
-                                                      "Sayısal Değer (Tam sayı)"
-                                                  ? FilteringTextInputFormatter
-                                                      .allow(RegExp('[0-9]'))
-                                                  : FilteringTextInputFormatter
-                                                      .allow(
-                                                          RegExp(item['REGEX']))
+                                      checkTextInputFormatter(item['TYPE'])
                                     ],
                                     keyboardType: item['TYPE']
                                             .toString()
@@ -225,11 +213,7 @@ class _SimpleText extends State<SimpleText> {
                                 : webExpandedLongTextValue1,
                             child: TextFormField(
                               validator: (value) {
-                                if (value == "" || value == null) {
-                                  return "";
-                                } else {
-                                  return null;
-                                }
+                                return checkRegexValidations(value!);
                               },
                               onChanged: (String value) {
                                 item['value'] = value;
@@ -243,18 +227,7 @@ class _SimpleText extends State<SimpleText> {
                                       : TextAlign.right,
                               controller: textFormFieldController,
                               inputFormatters: [
-                                item['REGEX'] != ""
-                                    ? FilteringTextInputFormatter.allow(
-                                        RegExp(item['REGEX']))
-                                    : item['TYPE'] == "Sayısal Değer"
-                                        ? FilteringTextInputFormatter.allow(
-                                            RegExp('[0-9.:]'))
-                                        : item['TYPE'] ==
-                                                "Sayısal Değer (Tam sayı)"
-                                            ? FilteringTextInputFormatter.allow(
-                                                RegExp('[0-9]'))
-                                            : FilteringTextInputFormatter.allow(
-                                                RegExp(item['REGEX']))
+                                checkTextInputFormatter(item['TYPE'])
                               ],
                               keyboardType: item['TYPE']
                                       .toString()
@@ -283,5 +256,31 @@ class _SimpleText extends State<SimpleText> {
         ],
       ),
     );
+  }
+
+  dynamic checkRegexValidations(String value) {
+    if (value == "") {
+      return "";
+    }
+    //Bize herhangi bir regex geliyor mu ona bakıyoruz.
+    else if (item['REGEX'] != "") {
+      if (RegExp(item['REGEX']).hasMatch(value)) {
+        return null;
+      } else {
+        return "";
+      }
+    } else {
+      return null;
+    }
+  }
+
+  TextInputFormatter checkTextInputFormatter(String type) {
+    if (item['TYPE'] == "Sayısal Değer") {
+      return FilteringTextInputFormatter.allow(RegExp('[0-9.:]'));
+    } else if (item['TYPE'] == "Sayısal Değer (Tam Sayı)") {
+      return FilteringTextInputFormatter.allow(RegExp('[0-9]'));
+    } else {
+      return FilteringTextInputFormatter.allow(RegExp(r'.*'));
+    }
   }
 }
