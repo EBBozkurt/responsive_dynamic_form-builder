@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:dynamic_form_builder/global_functions.dart';
 import 'package:flutter/material.dart';
@@ -8,18 +10,10 @@ class SimpleDate extends StatefulWidget {
     required this.item,
     required this.onChange,
     required this.position,
-    this.errorMessages = const {},
-    this.validations = const {},
-    this.decorations = const {},
-    this.keyboardTypes = const {},
   }) : super(key: key);
   final dynamic item;
   final Function onChange;
   final int position;
-  final Map errorMessages;
-  final Map validations;
-  final Map decorations;
-  final Map keyboardTypes;
 
   @override
   _SimpleDate createState() => _SimpleDate();
@@ -29,29 +23,24 @@ class _SimpleDate extends State<SimpleDate> {
   dynamic item;
   TextEditingController dateController = TextEditingController();
 
-  int webExpandedValue1 = 16;
-  int webExpandedValue2 = 4;
-  int webExpandedValue3 = 12;
-  int webExpandedValue4 = 8;
+  int webExpandedValue1 = 29;
+  int webExpandedValue2 = 11;
 
-  int mobileExpandedValue1 = 6;
-  int mobileExpandedValue2 = 4;
-  int mobileExpandedValue3 = 6;
-  int mobileExpandedValue4 = 4;
+  int mobileExpandedValue1 = 23;
+  int mobileExpandedValue2 = 27;
 
   @override
   void initState() {
     super.initState();
-    dateController.text = DateTime.now().toString();
-    item = widget.item;
+    dateController.text = "";
 
-    if (item["VALUE"] != "") {
-      dateController.text = item["VALUE"];
-    }
+    item = widget.item;
   }
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     Widget infoLabel = const SizedBox.shrink();
 
     if (item['INFORMATIONTEXT'] != "") {
@@ -117,9 +106,7 @@ class _SimpleDate extends State<SimpleDate> {
               child: Row(
                 children: [
                   Expanded(
-                    flex: globalFunctions.isMobilePhone()
-                        ? mobileExpandedValue3
-                        : webExpandedValue3,
+                    flex: 11,
                     child: DateTimePicker(
                         textAlignVertical: TextAlignVertical.top,
                         readOnly: item['READONLY'],
@@ -129,9 +116,11 @@ class _SimpleDate extends State<SimpleDate> {
                         firstDate: DateTime(2000),
                         lastDate: DateTime.now(),
                         onSaved: (value) {
+                          dateController.text = value!;
                           widget.onChange(widget.position, value: value);
                         },
                         onChanged: (value) {
+                          dateController.text = value;
                           widget.onChange(widget.position, value: value);
                         },
                         validator: (value) {
@@ -142,11 +131,7 @@ class _SimpleDate extends State<SimpleDate> {
                           }
                         }),
                   ),
-                  Expanded(
-                      flex: globalFunctions.isMobilePhone()
-                          ? mobileExpandedValue4
-                          : webExpandedValue4,
-                      child: const SizedBox())
+                  const Expanded(flex: 9, child: SizedBox())
                 ],
               ),
             ),

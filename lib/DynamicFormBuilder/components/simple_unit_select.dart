@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, non_constant_identifier_names, prefer_typing_uninitialized_variables
+// ignore_for_file: avoid_print, non_constant_identifier_names, prefer_typing_uninitialized_variables, unused_local_variable
 
 import 'package:flutter/material.dart';
 
@@ -25,22 +25,20 @@ class _SimpleUnitSelect extends State<SimpleUnitSelect> {
     item = widget.item;
 
     UnitDDListesi = item['UNITDATASOURCE'];
-    // secilenUnitItem = UnitDDListesi.singleWhere(
-    //     (element) => element["KEY"] == item['UNITVALUE']);
 
-    // if (item['UNITVALUE'] != "") {
-    //   if (item['UNIT']['DATASOURCE'] != "") {
-    //     UnitDDListesi = item['UNIT']['DATASOURCE'];
-    //     secilenUnit = UnitDDListesi.singleWhere(
-    //         (element) => element["KEY"] == item['UNITVALUE']);
-    //   }
-    // }
+    //Eğer ki Value'muz var ise daha önceden doldurulmuş bir formu açmışız demektir ve bundan dolayı setleme işlemlerimizi yapıyoruz.
+    if (item["UNITVALUE"] != "") {
+      secilenUnitItem = item["UNITVALUE"];
+
+      widget.onChange(item["UNITVALUE"]);
+    }
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       child: UnitDDListesi.length == 1
           ? Container(
@@ -56,9 +54,11 @@ class _SimpleUnitSelect extends State<SimpleUnitSelect> {
                   isExpanded: true,
                   items: UnitDDListesi.map((data) {
                     return DropdownMenuItem(
-                        value: data, child: Text(data['KEY']));
+                        value: data['VALUE'].toString() +
+                            " - " +
+                            data['KEY'].toString(),
+                        child: Text(data['KEY']));
                   }).toList(),
-                  hint: const Text("Seçiniz"),
                   value: secilenUnitItem,
                   validator: (value) {
                     if (value == "" || value == null) {
@@ -70,16 +70,11 @@ class _SimpleUnitSelect extends State<SimpleUnitSelect> {
                   decoration: const InputDecoration(
                       errorStyle: TextStyle(fontSize: 0.01)),
                   onChanged: (value) {
-                    print(value);
                     setState(() {
                       secilenUnitItem = value;
                     });
 
-                    var formattedValue = secilenUnitItem['VALUE'].toString() +
-                        " - " +
-                        secilenUnitItem['KEY'].toString();
-
-                    widget.onChange(formattedValue);
+                    widget.onChange(value);
                   }),
             ),
     );

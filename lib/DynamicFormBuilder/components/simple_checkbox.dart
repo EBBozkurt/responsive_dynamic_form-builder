@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 
 class SimpleListCheckbox extends StatefulWidget {
@@ -6,18 +8,10 @@ class SimpleListCheckbox extends StatefulWidget {
     required this.item,
     required this.onChange,
     required this.position,
-    this.errorMessages = const {},
-    this.validations = const {},
-    this.decorations = const {},
-    this.keyboardTypes = const {},
   }) : super(key: key);
   final dynamic item;
   final Function onChange;
   final int position;
-  final Map errorMessages;
-  final Map validations;
-  final Map decorations;
-  final Map keyboardTypes;
 
   @override
   _SimpleListCheckbox createState() => _SimpleListCheckbox();
@@ -25,17 +19,13 @@ class SimpleListCheckbox extends StatefulWidget {
 
 class _SimpleListCheckbox extends State<SimpleListCheckbox> {
   dynamic item;
-  List<dynamic> selectItems = [], selected = [];
+  List<dynamic> selectItems = [];
+  List selected = [];
 
   @override
   void initState() {
     super.initState();
     item = widget.item;
-    //TODO: EDİTTE SETLEME
-    
-    // for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
-    //   selectItems.add(i);
-    // }
 
     List tempListForSelected = item['VALUEDATASOURCE'];
 
@@ -45,6 +35,7 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     Widget infoLabel = const SizedBox.shrink();
 
     if (item['INFORMATIONTEXT'] != "") {
@@ -64,7 +55,7 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
         ),
       );
     }
-    //TODO: Checkbox validasyon kontrolü
+
     List<Widget> checkboxes = [];
 
     checkboxes.add(Column(
@@ -91,6 +82,7 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
     if (item['TABLEVEL'] != 0) {
       sectionPadding = SizedBox(width: item['TABLEVEL']);
     }
+
     for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
       checkboxes.add(
         Row(

@@ -1,10 +1,11 @@
-// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables, unused_local_variable
 
 import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
 import 'package:dynamic_form_builder/global_functions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class SimpleText extends StatefulWidget {
   const SimpleText({
@@ -12,18 +13,10 @@ class SimpleText extends StatefulWidget {
     required this.item,
     required this.onChange,
     required this.position,
-    this.errorMessages = const {},
-    this.validations = const {},
-    this.decorations = const {},
-    this.keyboardTypes = const {},
   }) : super(key: key);
   final dynamic item;
   final Function onChange;
   final int position;
-  final Map errorMessages;
-  final Map validations;
-  final Map decorations;
-  final Map keyboardTypes;
 
   @override
   _SimpleText createState() => _SimpleText();
@@ -33,25 +26,21 @@ class _SimpleText extends State<SimpleText> {
   dynamic item;
   var secilenUnit;
 
-  int webExpandedShortTextValue1 = 16;
-  int webExpandedShortTextValue2 = 4;
-  int webExpandedLongTextValue1 = 83;
-  int webExpandedLongTextValue2 = 7;
+  int webExpandedShortTextValue1 = 29;
+  int webExpandedShortTextValue2 = 11;
+  int webExpandedLongTextValue1 = 79;
+  int webExpandedLongTextValue2 = 11;
 
-  int mobileExpandedShortTextValue1 = 6;
-  int mobileExpandedShortTextValue2 = 4;
-  int mobileExpandedLongValue1 = 37;
-  int mobileExpandedLongValue2 = 8;
+  int mobileExpandedShortTextValue1 = 9;
+  int mobileExpandedShortTextValue2 = 11;
+  int mobileExpandedLongValue1 = 34;
+  int mobileExpandedLongValue2 = 11;
 
   TextEditingController textFormFieldController = TextEditingController();
 
   @override
   void initState() {
     item = widget.item;
-
-    // if (item["VALUE"] != "") {
-    //   textFormFieldController.text = item["VALUE"];
-    // }
 
     super.initState();
   }
@@ -153,14 +142,10 @@ class _SimpleText extends State<SimpleText> {
                             child: Row(
                               children: [
                                 Expanded(
-                                  flex: 12,
+                                  flex: 11,
                                   child: TextFormField(
                                     validator: (value) {
-                                      if (value == "" || value == null) {
-                                        return "";
-                                      } else {
-                                        return null;
-                                      }
+                                      return checkRegexValidations(value!);
                                     },
                                     onChanged: (String value) {
                                       item['value'] = value;
@@ -171,11 +156,12 @@ class _SimpleText extends State<SimpleText> {
                                     textAlign: item["ALIGNMENT"] == 0
                                         ? TextAlign.left
                                         : item["ALIGNMENT"] == 1
-                                            ? TextAlign.center
-                                            : TextAlign.right,
+                                            ? TextAlign.right
+                                            : TextAlign.center,
                                     controller: textFormFieldController,
                                     inputFormatters: [
-                                      checkTextInputFormatter(item['TYPE'])
+                                      checkTextInputFormatter(
+                                          item['TYPE'], item['INPUTMASK'])
                                     ],
                                     keyboardType: item['TYPE']
                                             .toString()
@@ -187,7 +173,7 @@ class _SimpleText extends State<SimpleText> {
                                         : item['MAXLENGTH'],
                                   ),
                                 ),
-                                Expanded(flex: 8, child: unit)
+                                Expanded(flex: 9, child: unit)
                               ],
                             ),
                           ),
@@ -223,11 +209,12 @@ class _SimpleText extends State<SimpleText> {
                               textAlign: item["ALIGNMENT"] == 0
                                   ? TextAlign.left
                                   : item["ALIGNMENT"] == 1
-                                      ? TextAlign.center
-                                      : TextAlign.right,
+                                      ? TextAlign.right
+                                      : TextAlign.center,
                               controller: textFormFieldController,
                               inputFormatters: [
-                                checkTextInputFormatter(item['TYPE'])
+                                checkTextInputFormatter(
+                                    item['TYPE'], item['INPUTMASK'])
                               ],
                               keyboardType: item['TYPE']
                                       .toString()
@@ -274,13 +261,34 @@ class _SimpleText extends State<SimpleText> {
     }
   }
 
-  TextInputFormatter checkTextInputFormatter(String type) {
+  TextInputFormatter checkTextInputFormatter(String type, String inputMask) {
     if (item['TYPE'] == "Sayısal Değer") {
-      return FilteringTextInputFormatter.allow(RegExp('[0-9.:]'));
+      if (inputMask != "") {
+        return MaskTextInputFormatter(
+            mask: inputMask,
+            filter: {"#": RegExp(r'[0-9.:]')},
+            type: MaskAutoCompletionType.lazy);
+      } else {
+        return FilteringTextInputFormatter.allow(RegExp('[0-9.:]'));
+      }
     } else if (item['TYPE'] == "Sayısal Değer (Tam Sayı)") {
-      return FilteringTextInputFormatter.allow(RegExp('[0-9]'));
+      if (inputMask != "") {
+        return MaskTextInputFormatter(
+            mask: inputMask,
+            filter: {"#": RegExp('[0-9]')},
+            type: MaskAutoCompletionType.lazy);
+      } else {
+        return FilteringTextInputFormatter.allow(RegExp('[0-9]'));
+      }
     } else {
-      return FilteringTextInputFormatter.allow(RegExp(r'.*'));
+      if (inputMask != "") {
+        return MaskTextInputFormatter(
+            mask: inputMask,
+            filter: {"#": RegExp(r'.*')},
+            type: MaskAutoCompletionType.lazy);
+      } else {
+        return FilteringTextInputFormatter.allow(RegExp(r'.*'));
+      }
     }
   }
 }

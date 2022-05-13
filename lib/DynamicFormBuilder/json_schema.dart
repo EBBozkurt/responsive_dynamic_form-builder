@@ -109,15 +109,14 @@ class _CoreFormState extends State<JsonSchema> {
     for (var count = 0; count < formGeneral['fields'].length; count++) {
       Map item = formGeneral['fields'][count];
 
-//    Çoktan Seçmeli (Radio)
-//    Çoktan Seçmeli (DD)
-//    Çoktan Seçmeli (Çoklu)
-//    Serbest Metin
-//    Sayısal Değer            --tek bir noktaya izin verilecek
-//    Sayısal Değer (Tam sayı) --rakam dışında bir şeye izin verme
-//    Tarih/Saat
-//    Tekil Dosya Ek
-//    Çoklu Dosya Ek
+      //TR - EN
+      //    Çoktan Seçmeli (Radio)    - Multiple Choice (Radio Button)
+      //    Çoktan Seçmeli (DD)       - Multiple Choice (DropDown Button)
+      //    Çoktan Seçmeli (Çoklu)    - Multiple Choice (Multiple Checkbox)
+      //    Serbest Metin             - Regular Text
+      //    Sayısal Değer             - Regular Text with only Number and dot
+      //    Sayısal Değer (Tam sayı)  - Regular Text with only Number
+      //    Tarih/Saat                - Date
 
       if (item['TYPE'] == "Sayısal Değer" ||
           item['TYPE'] == "Serbest Metin" ||
@@ -126,10 +125,6 @@ class _CoreFormState extends State<JsonSchema> {
           item: item,
           onChange: onChange,
           position: count,
-          decorations: widget.decorations,
-          errorMessages: widget.errorMessages,
-          validations: widget.validations,
-          keyboardTypes: widget.keyboardTypes,
         ));
       }
 
@@ -138,10 +133,6 @@ class _CoreFormState extends State<JsonSchema> {
           item: item,
           onChange: onChange,
           position: count,
-          decorations: widget.decorations,
-          errorMessages: widget.errorMessages,
-          validations: widget.validations,
-          keyboardTypes: widget.keyboardTypes,
         ));
       }
 
@@ -150,10 +141,6 @@ class _CoreFormState extends State<JsonSchema> {
           item: item,
           onChange: onChange,
           position: count,
-          decorations: widget.decorations,
-          errorMessages: widget.errorMessages,
-          validations: widget.validations,
-          keyboardTypes: widget.keyboardTypes,
         ));
       }
 
@@ -162,10 +149,6 @@ class _CoreFormState extends State<JsonSchema> {
           item: item,
           onChange: onChange,
           position: count,
-          decorations: widget.decorations,
-          errorMessages: widget.errorMessages,
-          validations: widget.validations,
-          keyboardTypes: widget.keyboardTypes,
         ));
       }
 
@@ -174,20 +157,12 @@ class _CoreFormState extends State<JsonSchema> {
           item: item,
           onChange: onChange,
           position: count,
-          decorations: widget.decorations,
-          errorMessages: widget.errorMessages,
-          validations: widget.validations,
-          keyboardTypes: widget.keyboardTypes,
         ));
       }
 
       if (item['SECTIONHEADER'] != "NONE") {
         listWidget.add(SimpleSectionHeader(
           item: item,
-          decorations: widget.decorations,
-          errorMessages: widget.errorMessages,
-          validations: widget.validations,
-          keyboardTypes: widget.keyboardTypes,
         ));
       }
     }

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, non_constant_identifier_names, prefer_typing_uninitialized_variables
+// ignore_for_file: avoid_print, non_constant_identifier_names, prefer_typing_uninitialized_variables, unused_local_variable
 
 import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
 import 'package:dynamic_form_builder/global_functions.dart';
@@ -10,19 +10,10 @@ class SimpleSelect extends StatefulWidget {
     required this.item,
     required this.onChange,
     required this.position,
-    this.errorMessages = const {},
-    this.validations = const {},
-    this.decorations = const {},
-    this.keyboardTypes = const {},
   }) : super(key: key);
   final dynamic item;
-
   final Function onChange;
   final int position;
-  final Map errorMessages;
-  final Map validations;
-  final Map decorations;
-  final Map keyboardTypes;
 
   @override
   _SimpleSelect createState() => _SimpleSelect();
@@ -34,15 +25,11 @@ class _SimpleSelect extends State<SimpleSelect> {
   List<dynamic> UnitDDListesi = [];
   var secilenItem, secilenUnit;
 
-  int webExpandedValue1 = 30;
-  int webExpandedValue2 = 10;
-  int webExpandedValue3 = 16;
-  int webExpandedValue4 = 4;
+  int webExpandedValue1 = 29;
+  int webExpandedValue2 = 11;
 
-  int mobileExpandedValue1 = 6;
-  int mobileExpandedValue2 = 4;
-  int mobileExpandedValue3 = 7;
-  int mobileExpandedValue4 = 3;
+  int mobileExpandedValue1 = 23;
+  int mobileExpandedValue2 = 27;
 
   @override
   void initState() {
@@ -53,21 +40,6 @@ class _SimpleSelect extends State<SimpleSelect> {
     } else {
       DDListesi = [];
     }
-
-    ///TODO: DropDownButton'un default value'si var ise gösterilecek kısım
-    // if (item["VALUE"] != "") {
-    //   secilenItem =
-    //       DDListesi.singleWhere((element) => element["VALUE"] == item['VALUE']);
-    // }
-
-    ///TODO: UNIT VALUE'NUN default value'si var ise gösterilecek kısım
-    // if (item['UNITVALUE'] != "") {
-    //   if (item['UNIT']['DATASOURCE'] != "") {
-    //     UnitDDListesi = item['UNIT']['DATASOURCE'];
-    //     secilenUnit = UnitDDListesi.singleWhere(
-    //         (element) => element["KEY"] == item['UNITVALUE']);
-    //   }
-    //}
 
     super.initState();
   }
@@ -80,6 +52,8 @@ class _SimpleSelect extends State<SimpleSelect> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     Widget infoLabel = const SizedBox.shrink();
 
     if (item['INFORMATIONTEXT'] != "") {
@@ -158,47 +132,47 @@ class _SimpleSelect extends State<SimpleSelect> {
                         child: label),
                     Expanded(
                       flex: globalFunctions.isMobilePhone()
-                          ? mobileExpandedValue3
-                          : webExpandedValue3,
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButtonFormField(
-                            isExpanded: true,
-                            items: DDListesi.map((data) {
-                              return DropdownMenuItem(
-                                  value: data, child: Text(data['KEY']));
-                            }).toList(),
-                            hint: const Text("Seçiniz"),
-                            value: secilenItem,
-                            validator: (value) {
-                              if (value == "" || value == null) {
-                                return "";
-                              } else {
-                                return null;
-                              }
-                            },
-                            decoration: const InputDecoration(
-                              errorStyle: TextStyle(fontSize: 0.01),
+                          ? mobileExpandedValue2
+                          : webExpandedValue2,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 11,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButtonFormField(
+                                  isExpanded: true,
+                                  items: DDListesi.map((data) {
+                                    return DropdownMenuItem(
+                                        value: data['VALUE'].toString() +
+                                            " - " +
+                                            data['KEY'].toString(),
+                                        child: Text(data['KEY']));
+                                  }).toList(),
+                                  value: secilenItem,
+                                  validator: (value) {
+                                    if (value == "" || value == null) {
+                                      return "";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: const InputDecoration(
+                                    errorStyle: TextStyle(fontSize: 0.01),
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      secilenItem = value;
+
+                                      widget.onChange(widget.position,
+                                          value: value);
+                                    });
+                                  }),
                             ),
-                            onChanged: (value) {
-                              setState(() {
-                                secilenItem = value;
-
-                                var formattedValue =
-                                    secilenItem['VALUE'].toString() +
-                                        " - " +
-                                        secilenItem['KEY'].toString();
-
-                                widget.onChange(widget.position,
-                                    value: formattedValue);
-                              });
-                            }),
+                          ),
+                          Expanded(flex: 9, child: unit)
+                        ],
                       ),
                     ),
-                    Expanded(
-                        flex: globalFunctions.isMobilePhone()
-                            ? mobileExpandedValue4
-                            : webExpandedValue4,
-                        child: unit)
                   ],
                 ),
                 Divider(

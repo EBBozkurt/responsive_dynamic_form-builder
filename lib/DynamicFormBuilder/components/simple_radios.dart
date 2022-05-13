@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 
 class SimpleRadios extends StatefulWidget {
@@ -6,18 +8,10 @@ class SimpleRadios extends StatefulWidget {
     required this.item,
     required this.onChange,
     required this.position,
-    this.errorMessages = const {},
-    this.validations = const {},
-    this.decorations = const {},
-    this.keyboardTypes = const {},
   }) : super(key: key);
   final dynamic item;
   final Function onChange;
   final int position;
-  final Map errorMessages;
-  final Map validations;
-  final Map decorations;
-  final Map keyboardTypes;
 
   @override
   _SimpleRadios createState() => _SimpleRadios();
@@ -26,6 +20,7 @@ class SimpleRadios extends StatefulWidget {
 class _SimpleRadios extends State<SimpleRadios> {
   dynamic item;
 
+  var tempGroupValue = -1;
   @override
   void initState() {
     super.initState();
@@ -34,6 +29,7 @@ class _SimpleRadios extends State<SimpleRadios> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     Widget infoLabel = const SizedBox.shrink();
 
     if (item['INFORMATIONTEXT'] != "") {
@@ -86,20 +82,17 @@ class _SimpleRadios extends State<SimpleRadios> {
     List<Widget> radios = [];
 
     for (var i = 0; i < item['VALUEDATASOURCE'].length; i++) {
-      dynamic tempValue, tempGroupValue;
-      tempGroupValue = -1;
       radios.add(
         Expanded(
           child: Row(
             children: <Widget>[
               Radio<dynamic>(
-                  value: tempValue,
+                  value: item['VALUEDATASOURCE'][i]['VALUE'],
                   groupValue: tempGroupValue,
                   onChanged: (dynamic value) {
                     setState(() {
-                      tempValue = value;
-                      print(tempValue);
-                      tempGroupValue = item['VALUEDATASOURCE'][i]['VALUE'];
+                      tempGroupValue = value;
+
                       widget.onChange(widget.position,
                           value:
                               item['VALUEDATASOURCE'][i]['VALUE'].toString() +
