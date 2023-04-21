@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names, prefer_typing_uninitialized_variables, unused_local_variable
 
-import 'package:dynamic_form_builder/DynamicFormBuilder/components/simple_unit_select.dart';
+import 'package:dynamic_form_builder/dynamic_form_builder/components/simple_unit_select.dart';
 import 'package:dynamic_form_builder/global_functions.dart';
 import 'package:flutter/material.dart';
 

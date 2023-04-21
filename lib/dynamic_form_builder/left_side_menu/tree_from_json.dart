@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:dynamic_form_builder/CustomTreeView/flutter_simple_treeview.dart';
+import 'package:dynamic_form_builder/custom_tree_view/flutter_simple_treeview.dart';
 import 'package:flutter/material.dart';
 
 class TreeFromJson extends StatefulWidget {

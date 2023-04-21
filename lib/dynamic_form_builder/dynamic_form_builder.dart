@@ -1,8 +1,8 @@
 // ignore_for_file: file_names, prefer_typing_uninitialized_variables, avoid_print
 
 import 'dart:convert';
-import 'package:dynamic_form_builder/DynamicFormBuilder/LeftSideMenu/treeFromJson.dart';
-import 'package:dynamic_form_builder/DynamicFormBuilder/json_schema.dart';
+import 'package:dynamic_form_builder/dynamic_form_builder/left_side_menu/tree_from_json.dart';
+import 'package:dynamic_form_builder/dynamic_form_builder/json_schema.dart';
 import 'package:dynamic_form_builder/global_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -404,7 +404,6 @@ class _DynamicFormBuilderState extends State<DynamicFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     return globalFunctions.isMobilePhone()
         ? _dynamicFormBuilderBodyForMobile()
         : _dynamicFormBuilderBodyForWeb();

@@ -1,4 +1,4 @@
-import 'package:dynamic_form_builder/DynamicFormBuilder/dynamic_form_builder.dart';
+import 'package:dynamic_form_builder/dynamic_form_builder/dynamic_form_builder.dart';
 import 'package:flutter/material.dart';
 
 //NOT:

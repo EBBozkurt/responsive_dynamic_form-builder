@@ -10,8 +10,8 @@ class GlobalFunctions {
   }
 
   bool isMobilePhone() {
-    Size size = WidgetsBinding.instance!.window.physicalSize;
-    double pixelRatio = WidgetsBinding.instance!.window.devicePixelRatio;
+    Size size = WidgetsBinding.instance.window.physicalSize;
+    double pixelRatio = WidgetsBinding.instance.window.devicePixelRatio;
     double width = size.width; //Width as a Resolution
     if (width / pixelRatio < 1100) {
       return true;
